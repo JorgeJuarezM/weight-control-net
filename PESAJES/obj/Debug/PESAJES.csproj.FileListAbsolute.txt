@@ -1,0 +1,11 @@
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_PRINCIPAL.resources
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.Properties.Resources.resources
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.csproj.GenerateResource.Cache
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\PESAJES.exe
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\PESAJES.pdb
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.exe
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.pdb
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\PESAJES.exe.config
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_OPERADORES.resources
+c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_TRANSPORTES.resources
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.csprojResolveAssemblyReference.cache
