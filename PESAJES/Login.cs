@@ -26,25 +26,23 @@ namespace PESAJES
 
             try
             {
-                IOdooLogin rpcLogin = XmlRpcProxyGen.Create<IOdooLogin>();
-                rpcLogin.Url = Properties.Settings.Default.OdooApiUrl;
-                var loginUser = rpcLogin.login(Properties.Settings.Default.OdooDataBase, username, password);
+                Env.odooApi = new odoo.OdooApi(username, password);
+                bool loginSuccess = Env.odooApi.Login();
 
-                bool? responseBool = loginUser as bool?;
-                int? responseInt = loginUser as int?;
-
-                if (responseBool == false)
+                if (loginSuccess == false)
                 {
                     throw new Exception("Usuario / Contraseña Incorrectos");
                 }
-                else if (responseInt != null)
+                else
                 {
-                    int user_id = Convert.ToInt32(responseInt);
+                    int user_id = Env.odooApi.UserId;
 
                     //Obtiene usuario
 
-                    OdooObject objUsers = new OdooObject(user_id, password, "res.users");
-                    OdooRecord user = objUsers.ReadOne(user_id, new string[] { "id", "name" });
+                    odoo.OdooModel userModel = Env.odooApi.GetModel("res.users");
+                    odoo.OdooRecord user = userModel.Browse(user_id);
+
+
                     if (user == null)
                     {
                         throw new Exception("Error al obtener informacion del usuario, intente nuevamente");
@@ -69,13 +67,6 @@ namespace PESAJES
             txtUsername.Focus();
             txtUsername.SelectAll();
         }
-    }
-
-    //[XmlRpcUrl("http://192.168.2.25:8069/xmlrpc/common")]
-    public interface IOdooLogin: IXmlRpcProxy
-    {
-        [XmlRpcMethod("login")]
-        object login(string dbName, string dbUser, string dbPassword);
     }
 
 

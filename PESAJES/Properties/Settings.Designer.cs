@@ -33,18 +33,9 @@ namespace PESAJES.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.2.25:8069/xmlrpc/common")]
-        public string OdooApiUrl {
-            get {
-                return ((string)(this["OdooApiUrl"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SUPERMIO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("BASCULA")]
         public string OdooDataBase {
             get {
                 return ((string)(this["OdooDataBase"]));
@@ -56,13 +47,13 @@ namespace PESAJES.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.2.25:8069/xmlrpc/object")]
-        public string OdooApiObjectUrl {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.2.25:8069")]
+        public string OdooApiUrl {
             get {
-                return ((string)(this["OdooApiObjectUrl"]));
+                return ((string)(this["OdooApiUrl"]));
             }
             set {
-                this["OdooApiObjectUrl"] = value;
+                this["OdooApiUrl"] = value;
             }
         }
     }
