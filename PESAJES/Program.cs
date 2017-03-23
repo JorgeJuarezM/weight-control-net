@@ -24,6 +24,7 @@ namespace PESAJES
             DialogResult result = (new Login()).ShowDialog();
             if(result == DialogResult.Yes)
             {
+                (new FRM_Actualiza()).ShowDialog();
                 Application.Run(new FRM_PRINCIPAL());
             }
         }

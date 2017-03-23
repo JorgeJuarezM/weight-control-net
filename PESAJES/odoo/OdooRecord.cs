@@ -48,7 +48,19 @@ namespace PESAJES.odoo
             }
             else
             {
-                return null;
+                throw new Exception("No existe el campo " + field);
+            }
+        }
+
+        public Int32 GetIntValue(string field)
+        {
+            if (__fields.ContainsKey(field))
+            {
+                return Convert.ToInt32(__fields[field]);
+            }
+            else
+            {
+                throw new Exception("No existe el campo " + field);
             }
         }
 

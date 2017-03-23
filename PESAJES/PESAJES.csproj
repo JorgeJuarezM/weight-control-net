@@ -53,6 +53,12 @@
       <DependentUpon>basculaDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Env.cs" />
+    <Compile Include="FRM_Actualiza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_Actualiza.Designer.cs">
+      <DependentUpon>FRM_Actualiza.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRM_OPERADORES.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ticket.cs" />
+    <EmbeddedResource Include="FRM_Actualiza.resx">
+      <DependentUpon>FRM_Actualiza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FRM_OPERADORES.resx">
       <DependentUpon>FRM_OPERADORES.cs</DependentUpon>
     </EmbeddedResource>

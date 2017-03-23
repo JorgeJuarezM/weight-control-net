@@ -74,8 +74,6 @@ namespace PESAJES.odoo
                     }
                 }
 
-                
-
                 records.Add(record);
             }
 
