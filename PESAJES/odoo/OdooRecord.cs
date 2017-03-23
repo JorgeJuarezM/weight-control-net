@@ -64,5 +64,29 @@ namespace PESAJES.odoo
             }
         }
 
+        public DateTime GetDateTimeValue(string field)
+        {
+            if (__fields.ContainsKey(field))
+            {
+                return Convert.ToDateTime(__fields[field]);
+            }
+            else
+            {
+                throw new Exception("No existe el campo " + field);
+            }
+        }
+
+        public Decimal GetDecimalValue(string field)
+        {
+            if (__fields.ContainsKey(field))
+            {
+                return Convert.ToDecimal(__fields[field]);
+            }
+            else
+            {
+                throw new Exception("No existe el campo " + field);
+            }
+        }
+
     }
 }

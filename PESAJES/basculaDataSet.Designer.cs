@@ -3295,13 +3295,18 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, " +
                 "PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS\r\nFROM            PES" +
                 "AJES WHERE BAJA = 0 and ESTADO = \'ABIERTO\'";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT COUNT(*) FROM PESAJES where FOLIO = @FOLIO";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FOLIO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FOLIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3501,6 +3506,35 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, global::System.Nullable<int> ID_TRANSPORTE, string ESTADO, bool BAJA, string PLACAS, int Original_ID) {
             return this.Update(FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS, Original_ID, Original_ID);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> ExisteFolio(int FOLIO) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(FOLIO));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     

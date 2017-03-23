@@ -44,6 +44,27 @@ namespace PESAJES
         private void SyncRecord(OdooRecord record)
         {
             Int32 folio = record.GetIntValue("folio");
+            basculaDataSetTableAdapters.PESAJESTableAdapter ta = new basculaDataSetTableAdapters.PESAJESTableAdapter();
+            Int32 existe = (Int32)ta.ExisteFolio(folio);
+
+            if(existe == 0)
+            {
+                ta.Insert(
+                        folio,
+                        record.GetDateTimeValue("date"),
+                        null,
+                        0,
+                        record.GetDecimalValue("gross_weight"),
+                        0,
+                        1,
+                        1,
+                        "ABIERTO",
+                        false,
+                        record.GetStringValue("vehicle_plate")
+                    );
+            }
+
+
         }
     }
 }
