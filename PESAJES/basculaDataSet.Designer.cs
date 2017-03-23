@@ -1315,6 +1315,7 @@ namespace PESAJES {
                 this.columnPESO_SALIDA.AllowDBNull = false;
                 this.columnPESO_NETO.AllowDBNull = false;
                 this.columnESTADO.AllowDBNull = false;
+                this.columnESTADO.DefaultValue = ((string)("__NUEVO__"));
                 this.columnESTADO.MaxLength = 20;
                 this.columnBAJA.AllowDBNull = false;
                 this.columnPLACAS.AllowDBNull = false;
@@ -3299,7 +3300,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, " +
                 "PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS\r\nFROM            PES" +
-                "AJES WHERE BAJA = 0";
+                "AJES WHERE BAJA = 0 and ESTADO = \'ABIERTO\'";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

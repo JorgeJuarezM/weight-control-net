@@ -157,7 +157,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS
-FROM            PESAJES WHERE BAJA = 0</CommandText>
+FROM            PESAJES WHERE BAJA = 0 and ESTADO = 'ABIERTO'</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -276,7 +276,7 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
   <xs:element name="basculaDataSet" msdata:IsDataSet="true" msdata:Locale="es-ES" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="basculaDataSet" msprop:Generator_UserDSName="basculaDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="FOLIOS" msprop:Generator_TableClassName="FOLIOSDataTable" msprop:Generator_TableVarName="tableFOLIOS" msprop:Generator_RowChangedName="FOLIOSRowChanged" msprop:Generator_TablePropName="FOLIOS" msprop:Generator_RowDeletingName="FOLIOSRowDeleting" msprop:Generator_RowChangingName="FOLIOSRowChanging" msprop:Generator_RowEvHandlerName="FOLIOSRowChangeEventHandler" msprop:Generator_RowDeletedName="FOLIOSRowDeleted" msprop:Generator_RowClassName="FOLIOSRow" msprop:Generator_UserTableName="FOLIOS" msprop:Generator_RowEvArgName="FOLIOSRowChangeEvent">
+        <xs:element name="FOLIOS" msprop:Generator_TableClassName="FOLIOSDataTable" msprop:Generator_TableVarName="tableFOLIOS" msprop:Generator_TablePropName="FOLIOS" msprop:Generator_RowDeletingName="FOLIOSRowDeleting" msprop:Generator_RowChangingName="FOLIOSRowChanging" msprop:Generator_RowEvHandlerName="FOLIOSRowChangeEventHandler" msprop:Generator_RowDeletedName="FOLIOSRowDeleted" msprop:Generator_UserTableName="FOLIOS" msprop:Generator_RowChangedName="FOLIOSRowChanged" msprop:Generator_RowEvArgName="FOLIOSRowChangeEvent" msprop:Generator_RowClassName="FOLIOSRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SECUENCIA" msprop:Generator_ColumnVarNameInTable="columnSECUENCIA" msprop:Generator_ColumnPropNameInRow="SECUENCIA" msprop:Generator_ColumnPropNameInTable="SECUENCIAColumn" msprop:Generator_UserColumnName="SECUENCIA">
@@ -292,7 +292,7 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="OPERADORES" msprop:Generator_TableClassName="OPERADORESDataTable" msprop:Generator_TableVarName="tableOPERADORES" msprop:Generator_RowChangedName="OPERADORESRowChanged" msprop:Generator_TablePropName="OPERADORES" msprop:Generator_RowDeletingName="OPERADORESRowDeleting" msprop:Generator_RowChangingName="OPERADORESRowChanging" msprop:Generator_RowEvHandlerName="OPERADORESRowChangeEventHandler" msprop:Generator_RowDeletedName="OPERADORESRowDeleted" msprop:Generator_RowClassName="OPERADORESRow" msprop:Generator_UserTableName="OPERADORES" msprop:Generator_RowEvArgName="OPERADORESRowChangeEvent">
+        <xs:element name="OPERADORES" msprop:Generator_TableClassName="OPERADORESDataTable" msprop:Generator_TableVarName="tableOPERADORES" msprop:Generator_TablePropName="OPERADORES" msprop:Generator_RowDeletingName="OPERADORESRowDeleting" msprop:Generator_RowChangingName="OPERADORESRowChanging" msprop:Generator_RowEvHandlerName="OPERADORESRowChangeEventHandler" msprop:Generator_RowDeletedName="OPERADORESRowDeleted" msprop:Generator_UserTableName="OPERADORES" msprop:Generator_RowChangedName="OPERADORESRowChanged" msprop:Generator_RowEvArgName="OPERADORESRowChangeEvent" msprop:Generator_RowClassName="OPERADORESRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -308,7 +308,7 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PESAJES" msdata:Locale="es-ES" msprop:Generator_TableClassName="PESAJESDataTable" msprop:Generator_TableVarName="tablePESAJES" msprop:Generator_RowChangedName="PESAJESRowChanged" msprop:Generator_TablePropName="PESAJES" msprop:Generator_RowDeletingName="PESAJESRowDeleting" msprop:Generator_RowChangingName="PESAJESRowChanging" msprop:Generator_RowEvHandlerName="PESAJESRowChangeEventHandler" msprop:Generator_RowDeletedName="PESAJESRowDeleted" msprop:Generator_RowClassName="PESAJESRow" msprop:Generator_UserTableName="PESAJES" msprop:Generator_RowEvArgName="PESAJESRowChangeEvent">
+        <xs:element name="PESAJES" msdata:Locale="es-ES" msprop:Generator_TableClassName="PESAJESDataTable" msprop:Generator_TableVarName="tablePESAJES" msprop:Generator_TablePropName="PESAJES" msprop:Generator_RowDeletingName="PESAJESRowDeleting" msprop:Generator_RowChangingName="PESAJESRowChanging" msprop:Generator_RowEvHandlerName="PESAJESRowChangeEventHandler" msprop:Generator_RowDeletedName="PESAJESRowDeleted" msprop:Generator_UserTableName="PESAJES" msprop:Generator_RowChangedName="PESAJESRowChanged" msprop:Generator_RowEvArgName="PESAJESRowChangeEvent" msprop:Generator_RowClassName="PESAJESRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -320,7 +320,7 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
               <xs:element name="PESO_NETO" msprop:Generator_ColumnVarNameInTable="columnPESO_NETO" msprop:Generator_ColumnPropNameInRow="PESO_NETO" msprop:Generator_ColumnPropNameInTable="PESO_NETOColumn" msprop:Generator_UserColumnName="PESO_NETO" type="xs:decimal" />
               <xs:element name="ID_OPERADOR" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInRow="ID_OPERADOR" msprop:Generator_ColumnVarNameInTable="columnID_OPERADOR" msprop:Generator_ColumnPropNameInTable="ID_OPERADORColumn" msprop:Generator_UserColumnName="ID_OPERADOR" type="xs:int" minOccurs="0" />
               <xs:element name="ID_TRANSPORTE" msprop:Generator_ColumnVarNameInTable="columnID_TRANSPORTE" msprop:Generator_ColumnPropNameInRow="ID_TRANSPORTE" msprop:Generator_ColumnPropNameInTable="ID_TRANSPORTEColumn" msprop:Generator_UserColumnName="ID_TRANSPORTE" type="xs:int" minOccurs="0" />
-              <xs:element name="ESTADO" msprop:Generator_ColumnVarNameInTable="columnESTADO" msprop:Generator_ColumnPropNameInRow="ESTADO" msprop:Generator_ColumnPropNameInTable="ESTADOColumn" msprop:Generator_UserColumnName="ESTADO">
+              <xs:element name="ESTADO" msprop:Generator_ColumnVarNameInTable="columnESTADO" msprop:Generator_ColumnPropNameInRow="ESTADO" msprop:Generator_ColumnPropNameInTable="ESTADOColumn" msprop:Generator_UserColumnName="ESTADO" default="__NUEVO__">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
@@ -338,7 +338,7 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TRANSPORTES" msprop:Generator_TableClassName="TRANSPORTESDataTable" msprop:Generator_TableVarName="tableTRANSPORTES" msprop:Generator_RowChangedName="TRANSPORTESRowChanged" msprop:Generator_TablePropName="TRANSPORTES" msprop:Generator_RowDeletingName="TRANSPORTESRowDeleting" msprop:Generator_RowChangingName="TRANSPORTESRowChanging" msprop:Generator_RowEvHandlerName="TRANSPORTESRowChangeEventHandler" msprop:Generator_RowDeletedName="TRANSPORTESRowDeleted" msprop:Generator_RowClassName="TRANSPORTESRow" msprop:Generator_UserTableName="TRANSPORTES" msprop:Generator_RowEvArgName="TRANSPORTESRowChangeEvent">
+        <xs:element name="TRANSPORTES" msprop:Generator_TableClassName="TRANSPORTESDataTable" msprop:Generator_TableVarName="tableTRANSPORTES" msprop:Generator_TablePropName="TRANSPORTES" msprop:Generator_RowDeletingName="TRANSPORTESRowDeleting" msprop:Generator_RowChangingName="TRANSPORTESRowChanging" msprop:Generator_RowEvHandlerName="TRANSPORTESRowChangeEventHandler" msprop:Generator_RowDeletedName="TRANSPORTESRowDeleted" msprop:Generator_UserTableName="TRANSPORTES" msprop:Generator_RowChangedName="TRANSPORTESRowChanged" msprop:Generator_RowEvArgName="TRANSPORTESRowChangeEvent" msprop:Generator_RowClassName="TRANSPORTESRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -395,9 +395,9 @@ SELECT ID, TRANSPORTE, PLACAS, COLOR, CAPACIDAD, BAJA FROM TRANSPORTES WHERE (ID
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_OPERADORES_TRANSPORTES" msdata:parent="TRANSPORTES" msdata:child="OPERADORES" msdata:parentkey="ID" msdata:childkey="ID_TRANSPORTE" msprop:Generator_UserChildTable="OPERADORES" msprop:Generator_ChildPropName="GetOPERADORESRows" msprop:Generator_UserRelationName="FK_OPERADORES_TRANSPORTES" msprop:Generator_ParentPropName="TRANSPORTESRow" msprop:Generator_RelationVarName="relationFK_OPERADORES_TRANSPORTES" msprop:Generator_UserParentTable="TRANSPORTES" />
-      <msdata:Relationship name="FK_PESAJES_OPERADORES" msdata:parent="OPERADORES" msdata:child="PESAJES" msdata:parentkey="ID" msdata:childkey="ID_OPERADOR" msprop:Generator_UserChildTable="PESAJES" msprop:Generator_ChildPropName="GetPESAJESRows" msprop:Generator_UserRelationName="FK_PESAJES_OPERADORES" msprop:Generator_RelationVarName="relationFK_PESAJES_OPERADORES" msprop:Generator_UserParentTable="OPERADORES" msprop:Generator_ParentPropName="OPERADORESRow" />
-      <msdata:Relationship name="FK_PESAJES_TRANSPORTES" msdata:parent="TRANSPORTES" msdata:child="PESAJES" msdata:parentkey="ID" msdata:childkey="ID_TRANSPORTE" msprop:Generator_UserChildTable="PESAJES" msprop:Generator_ChildPropName="GetPESAJESRows" msprop:Generator_UserRelationName="FK_PESAJES_TRANSPORTES" msprop:Generator_ParentPropName="TRANSPORTESRow" msprop:Generator_RelationVarName="relationFK_PESAJES_TRANSPORTES" msprop:Generator_UserParentTable="TRANSPORTES" />
+      <msdata:Relationship name="FK_OPERADORES_TRANSPORTES" msdata:parent="TRANSPORTES" msdata:child="OPERADORES" msdata:parentkey="ID" msdata:childkey="ID_TRANSPORTE" msprop:Generator_UserChildTable="OPERADORES" msprop:Generator_ChildPropName="GetOPERADORESRows" msprop:Generator_UserRelationName="FK_OPERADORES_TRANSPORTES" msprop:Generator_RelationVarName="relationFK_OPERADORES_TRANSPORTES" msprop:Generator_UserParentTable="TRANSPORTES" msprop:Generator_ParentPropName="TRANSPORTESRow" />
+      <msdata:Relationship name="FK_PESAJES_OPERADORES" msdata:parent="OPERADORES" msdata:child="PESAJES" msdata:parentkey="ID" msdata:childkey="ID_OPERADOR" msprop:Generator_UserChildTable="PESAJES" msprop:Generator_ChildPropName="GetPESAJESRows" msprop:Generator_UserRelationName="FK_PESAJES_OPERADORES" msprop:Generator_ParentPropName="OPERADORESRow" msprop:Generator_RelationVarName="relationFK_PESAJES_OPERADORES" msprop:Generator_UserParentTable="OPERADORES" />
+      <msdata:Relationship name="FK_PESAJES_TRANSPORTES" msdata:parent="TRANSPORTES" msdata:child="PESAJES" msdata:parentkey="ID" msdata:childkey="ID_TRANSPORTE" msprop:Generator_UserChildTable="PESAJES" msprop:Generator_ChildPropName="GetPESAJESRows" msprop:Generator_UserRelationName="FK_PESAJES_TRANSPORTES" msprop:Generator_RelationVarName="relationFK_PESAJES_TRANSPORTES" msprop:Generator_UserParentTable="TRANSPORTES" msprop:Generator_ParentPropName="TRANSPORTESRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

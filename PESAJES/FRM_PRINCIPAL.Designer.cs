@@ -45,7 +45,6 @@
             this.tRANSPORTESTableAdapter = new PESAJES.basculaDataSetTableAdapters.TRANSPORTESTableAdapter();
             this.pESAJESBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -55,7 +54,6 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.pESAJESBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.fOLIOTextBox = new System.Windows.Forms.TextBox();
             this.pESO_ENTRADATextBox = new System.Windows.Forms.TextBox();
             this.pESO_SALIDATextBox = new System.Windows.Forms.TextBox();
@@ -68,6 +66,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tRANSPORTELabel1 = new System.Windows.Forms.Label();
+            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -157,6 +157,7 @@
             // 
             this.pESAJESBindingSource.DataMember = "PESAJES";
             this.pESAJESBindingSource.DataSource = this.basculaDataSet;
+            this.pESAJESBindingSource.CurrentChanged += new System.EventHandler(this.pESAJESBindingSource_CurrentChanged);
             // 
             // pESAJESTableAdapter
             // 
@@ -184,7 +185,7 @@
             this.pESAJESBindingNavigator.AddNewItem = null;
             this.pESAJESBindingNavigator.BindingSource = this.pESAJESBindingSource;
             this.pESAJESBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.pESAJESBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.pESAJESBindingNavigator.DeleteItem = null;
             this.pESAJESBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -195,9 +196,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.pESAJESBindingNavigatorSaveItem});
+            this.bindingNavigatorAddNewItem});
             this.pESAJESBindingNavigator.Location = new System.Drawing.Point(0, 24);
             this.pESAJESBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.pESAJESBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -208,6 +207,7 @@
             this.pESAJESBindingNavigator.Size = new System.Drawing.Size(746, 25);
             this.pESAJESBindingNavigator.TabIndex = 1;
             this.pESAJESBindingNavigator.Text = "bindingNavigator1";
+            this.pESAJESBindingNavigator.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.pESAJESBindingNavigator_ItemClicked);
             // 
             // bindingNavigatorCountItem
             // 
@@ -215,15 +215,6 @@
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
             this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Eliminar";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -295,24 +286,15 @@
             this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
             this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.bindingNavigatorAddNewItem_Click);
             // 
-            // pESAJESBindingNavigatorSaveItem
-            // 
-            this.pESAJESBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pESAJESBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("pESAJESBindingNavigatorSaveItem.Image")));
-            this.pESAJESBindingNavigatorSaveItem.Name = "pESAJESBindingNavigatorSaveItem";
-            this.pESAJESBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.pESAJESBindingNavigatorSaveItem.Text = "Guardar datos";
-            this.pESAJESBindingNavigatorSaveItem.Click += new System.EventHandler(this.pESAJESBindingNavigatorSaveItem_Click);
-            // 
             // fOLIOTextBox
             // 
             this.fOLIOTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "FOLIO", true));
             this.fOLIOTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fOLIOTextBox.Location = new System.Drawing.Point(132, 371);
             this.fOLIOTextBox.Name = "fOLIOTextBox";
-            this.fOLIOTextBox.ReadOnly = true;
             this.fOLIOTextBox.Size = new System.Drawing.Size(140, 31);
             this.fOLIOTextBox.TabIndex = 5;
+            this.fOLIOTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fOLIOTextBox_KeyDown);
             // 
             // pESO_ENTRADATextBox
             // 
@@ -378,6 +360,7 @@
             this.iD_OPERADORComboBox.Size = new System.Drawing.Size(415, 28);
             this.iD_OPERADORComboBox.TabIndex = 1;
             this.iD_OPERADORComboBox.ValueMember = "ID";
+            this.iD_OPERADORComboBox.SelectedIndexChanged += new System.EventHandler(this.iD_OPERADORComboBox_SelectedIndexChanged);
             // 
             // oPERADORESBindingSource
             // 
@@ -453,11 +436,34 @@
             this.tRANSPORTELabel1.TabIndex = 26;
             this.tRANSPORTELabel1.Text = "label1";
             // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.Location = new System.Drawing.Point(624, 266);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(107, 57);
+            this.btnRegistrar.TabIndex = 27;
+            this.btnRegistrar.Text = "R E G I S T R A R";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Enabled = false;
+            this.btnCancelar.Location = new System.Drawing.Point(624, 350);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(107, 35);
+            this.btnCancelar.TabIndex = 28;
+            this.btnCancelar.Text = "C A N C E L A R";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(746, 429);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.tRANSPORTELabel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.iD_TRANSPORTEComboBox);
@@ -506,7 +512,6 @@
         private System.Windows.Forms.BindingNavigator pESAJESBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
@@ -515,7 +520,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton pESAJESBindingNavigatorSaveItem;
         private basculaDataSetTableAdapters.OPERADORESTableAdapter oPERADORESTableAdapter;
         private System.Windows.Forms.TextBox fOLIOTextBox;
         private System.Windows.Forms.TextBox pESO_ENTRADATextBox;
@@ -530,5 +534,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label tRANSPORTELabel1;
+        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }
