@@ -44,10 +44,14 @@ namespace PESAJES
                     //Obtiene usuario
 
                     OdooObject objUsers = new OdooObject(user_id, password, "res.users");
-                    Hashtable user = objUsers.ReadOne(user_id, new string[] { "id", "name" });
+                    OdooRecord user = objUsers.ReadOne(user_id, new string[] { "id", "name" });
                     if (user == null)
                     {
                         throw new Exception("Error al obtener informacion del usuario, intente nuevamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bienvenido " + user.GetStringValue("name"));
                     }
                 }
 
