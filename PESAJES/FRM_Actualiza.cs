@@ -21,7 +21,25 @@ namespace PESAJES
         {
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += Bw_DoWork;
+            bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
             bw.RunWorkerAsync();
+        }
+
+        private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.close_form();
+        }
+
+        private void close_form()
+        {
+            if(InvokeRequired)
+            {
+                this.Invoke(new Action(()=> close_form()));
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void Bw_DoWork(object sender, DoWorkEventArgs e)
@@ -45,22 +63,62 @@ namespace PESAJES
             });
 
 
-            foreach(OdooRecord pesaje in pesajes)
+            foreach (OdooRecord pesaje in pesajes)
             {
-                SyncRecord(pesaje);
+                SyncRecord_DOWN(pesaje);
             }
 
         }
 
         private void SyncDriver(OdooRecord record)
         {
+            Int32 id_odoo = record.GetIntValue("id");
+            basculaDataSetTableAdapters.OPERADORESTableAdapter ta = new basculaDataSetTableAdapters.OPERADORESTableAdapter();
+
+            Int32 existeOdoo = (Int32)ta.ExisteOdoo(id_odoo);
+
+            string nombre_operador = record.GetStringValue("name");
+            string placas = record.GetStringValue("vehicle_plate");
+            string telefono = record.GetStringValue("phone_number");
+
+            if (existeOdoo == 0)
+            {
+                ta.Insert(nombre_operador, placas, telefono, id_odoo);
+            }
+            else if(existeOdoo == 1)
+            {
+                //Update
+                Int32 id = (Int32)ta.GetId(id_odoo);
+                ta.Update(nombre_operador, placas, telefono, id_odoo, id);
+            }
 
         }
 
-        private void SyncRecord(OdooRecord record)
+        private void SyncRecord_DOWN(OdooRecord record)
         {
+            basculaDataSetTableAdapters.OPERADORESTableAdapter taOperador = new basculaDataSetTableAdapters.OPERADORESTableAdapter();
+
             Int32 id_odoo = record.GetIntValue("id");
             Int32 folio = record.GetIntValue("folio");
+
+            Int32 id_operador_odoo = record.GetIntValue("vehicle_driver");
+            Int32 id_operador = (Int32)taOperador.GetId(id_operador_odoo);
+            DateTime fecha_entrada = record.GetDateTimeValue("date");
+            
+            string placas = record.GetStringValue("vehicle_plate");
+
+            string tipo_peso = record.GetStringValue("type");
+
+            decimal peso_salida = 0;
+
+            if (tipo_peso == "pll")
+            {
+                peso_salida = record.GetDecimalValue("gross_weight");
+            }
+            else if(tipo_peso == "psa")
+            {
+                peso_salida = record.GetDecimalValue("box_weight");
+            }
 
 
             basculaDataSetTableAdapters.PESAJESTableAdapter ta = new basculaDataSetTableAdapters.PESAJESTableAdapter();
@@ -72,17 +130,17 @@ namespace PESAJES
                 if(existeFolio == 0)
                 {
                     ta.Insert(
-                        record.GetIntValue("folio"), //Folio
-                        record.GetDateTimeValue("date"),
+                        folio, //Folio
+                        fecha_entrada,
                         null, //Fecha Salida
                         0, //Peso Entrada
-                        record.GetDecimalValue("gross_weight"), //Peso Salida
+                        peso_salida, //Peso Salida
                         0, //Peso Neto
-                        1, //Operador
-                        record.GetStringValue("vehicle_plate"), //PLacas
+                        id_operador, //Operador
+                        placas, //PLacas
                         "ABIERTO", //Estado
                         false, //Baja
-                        record.GetIntValue("id") //External ID
+                        id_odoo //External ID
                     );
                 }
                 else
@@ -93,6 +151,8 @@ namespace PESAJES
             else
             {
                 //Si existe y es coherente, actualizarlo
+                Int32 id = (Int32)ta.GetId(id_odoo);
+                ta.Update(folio, fecha_entrada, null, 0, peso_salida, 0, id_operador, placas, "ABIERTO", false, id_odoo, id);
             }
         }
     }

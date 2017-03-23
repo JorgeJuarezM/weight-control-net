@@ -18,7 +18,7 @@ namespace PESAJES
 
         private void tRANSPORTESToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            (new FRM_TRANSPORTES()).ShowDialog();
+            //(new FRM_TRANSPORTES()).ShowDialog();
         }
 
         private void oPERADORESToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,8 +35,6 @@ namespace PESAJES
 
         private void FRM_PRINCIPAL_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.TRANSPORTES' Puede moverla o quitarla según sea necesario.
-            this.tRANSPORTESTableAdapter.Fill(this.basculaDataSet.TRANSPORTES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.OPERADORES' Puede moverla o quitarla según sea necesario.
             this.oPERADORESTableAdapter.Fill(this.basculaDataSet.OPERADORES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.PESAJES' Puede moverla o quitarla según sea necesario.
@@ -124,18 +122,18 @@ namespace PESAJES
         private void iD_OPERADORComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            try
-            {
-                var id_operador_obj = iD_OPERADORComboBox.SelectedValue;
-                int id_operador = Convert.ToInt32(id_operador_obj);
+            //try
+            //{
+            //    var id_operador_obj = iD_OPERADORComboBox.SelectedValue;
+            //    int id_operador = Convert.ToInt32(id_operador_obj);
 
-                oPERADORESBindingSource.Position = oPERADORESBindingSource.Find("id", id_operador);
-                if (oPERADORESBindingSource.Current != null)
-                {
-                    basculaDataSet.OPERADORESRow drOperador = (basculaDataSet.OPERADORESRow)((DataRowView)oPERADORESBindingSource.Current).Row;
-                    iD_TRANSPORTEComboBox.SelectedValue = drOperador.ID_TRANSPORTE;
-                }
-            } catch (Exception) { }
+            //    oPERADORESBindingSource.Position = oPERADORESBindingSource.Find("id", id_operador);
+            //    if (oPERADORESBindingSource.Current != null)
+            //    {
+            //        basculaDataSet.OPERADORESRow drOperador = (basculaDataSet.OPERADORESRow)((DataRowView)oPERADORESBindingSource.Current).Row;
+            //        iD_TRANSPORTEComboBox.SelectedValue = drOperador.ID_TRANSPORTE;
+            //    }
+            //} catch (Exception) { }
         }
 
         private void fOLIOTextBox_KeyDown(object sender, KeyEventArgs e)

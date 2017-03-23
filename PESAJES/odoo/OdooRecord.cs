@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace PESAJES.odoo
@@ -56,7 +57,19 @@ namespace PESAJES.odoo
         {
             if (__fields.ContainsKey(field))
             {
-                return Convert.ToInt32(__fields[field]);
+                object value = __fields[field];
+
+                Type t = value.GetType();
+                if(t == (new Object[] { }).GetType())
+                {
+
+                    Object[] values = (Object[])value;
+                    return Convert.ToInt32(values[0]);
+                }
+                else
+                {
+                    return Convert.ToInt32(__fields[field]);
+                }
             }
             else
             {

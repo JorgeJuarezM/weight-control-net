@@ -42,7 +42,6 @@
             this.pESAJESTableAdapter = new PESAJES.basculaDataSetTableAdapters.PESAJESTableAdapter();
             this.tableAdapterManager = new PESAJES.basculaDataSetTableAdapters.TableAdapterManager();
             this.oPERADORESTableAdapter = new PESAJES.basculaDataSetTableAdapters.OPERADORESTableAdapter();
-            this.tRANSPORTESTableAdapter = new PESAJES.basculaDataSetTableAdapters.TRANSPORTESTableAdapter();
             this.pESAJESBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -169,7 +168,6 @@
             this.tableAdapterManager.FOLIOSTableAdapter = null;
             this.tableAdapterManager.OPERADORESTableAdapter = this.oPERADORESTableAdapter;
             this.tableAdapterManager.PESAJESTableAdapter = this.pESAJESTableAdapter;
-            this.tableAdapterManager.TRANSPORTESTableAdapter = this.tRANSPORTESTableAdapter;
             this.tableAdapterManager.UpdateOrder = PESAJES.basculaDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // oPERADORESTableAdapter
@@ -178,7 +176,6 @@
             // 
             // tRANSPORTESTableAdapter
             // 
-            this.tRANSPORTESTableAdapter.ClearBeforeFill = true;
             // 
             // pESAJESBindingNavigator
             // 
@@ -488,7 +485,6 @@
             this.pESAJESBindingNavigator.ResumeLayout(false);
             this.pESAJESBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oPERADORESBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tRANSPORTESBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -528,7 +524,6 @@
         private System.Windows.Forms.ComboBox iD_OPERADORComboBox;
         private System.Windows.Forms.ComboBox iD_TRANSPORTEComboBox;
         private System.Windows.Forms.BindingSource oPERADORESBindingSource;
-        private basculaDataSetTableAdapters.TRANSPORTESTableAdapter tRANSPORTESTableAdapter;
         private System.Windows.Forms.BindingSource tRANSPORTESBindingSource;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

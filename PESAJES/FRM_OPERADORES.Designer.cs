@@ -85,7 +85,6 @@
             this.tableAdapterManager.FOLIOSTableAdapter = null;
             this.tableAdapterManager.OPERADORESTableAdapter = this.oPERADORESTableAdapter;
             this.tableAdapterManager.PESAJESTableAdapter = null;
-            this.tableAdapterManager.TRANSPORTESTableAdapter = null;
             this.tableAdapterManager.UpdateOrder = PESAJES.basculaDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // oPERADORESBindingNavigator
