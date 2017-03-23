@@ -36,8 +36,6 @@ namespace PESAJES {
         
         private global::System.Data.DataRelation relationFK_PESAJES_OPERADORES;
         
-        private global::System.Data.DataRelation relationFK_PESAJES_TRANSPORTES;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -274,7 +272,6 @@ namespace PESAJES {
             }
             this.relationFK_OPERADORES_TRANSPORTES = this.Relations["FK_OPERADORES_TRANSPORTES"];
             this.relationFK_PESAJES_OPERADORES = this.Relations["FK_PESAJES_OPERADORES"];
-            this.relationFK_PESAJES_TRANSPORTES = this.Relations["FK_PESAJES_TRANSPORTES"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -302,10 +299,6 @@ namespace PESAJES {
                         this.tableOPERADORES.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePESAJES.ID_OPERADORColumn}, false);
             this.Relations.Add(this.relationFK_PESAJES_OPERADORES);
-            this.relationFK_PESAJES_TRANSPORTES = new global::System.Data.DataRelation("FK_PESAJES_TRANSPORTES", new global::System.Data.DataColumn[] {
-                        this.tableTRANSPORTES.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePESAJES.ID_TRANSPORTEColumn}, false);
-            this.Relations.Add(this.relationFK_PESAJES_TRANSPORTES);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1036,13 +1029,13 @@ namespace PESAJES {
             
             private global::System.Data.DataColumn columnID_OPERADOR;
             
-            private global::System.Data.DataColumn columnID_TRANSPORTE;
-            
             private global::System.Data.DataColumn columnESTADO;
             
             private global::System.Data.DataColumn columnBAJA;
             
             private global::System.Data.DataColumn columnPLACAS;
+            
+            private global::System.Data.DataColumn columnID_EXTERNO;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1143,14 +1136,6 @@ namespace PESAJES {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ID_TRANSPORTEColumn {
-                get {
-                    return this.columnID_TRANSPORTE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn ESTADOColumn {
                 get {
                     return this.columnESTADO;
@@ -1170,6 +1155,14 @@ namespace PESAJES {
             public global::System.Data.DataColumn PLACASColumn {
                 get {
                     return this.columnPLACAS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ID_EXTERNOColumn {
+                get {
+                    return this.columnID_EXTERNO;
                 }
             }
             
@@ -1210,7 +1203,7 @@ namespace PESAJES {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PESAJESRow AddPESAJESRow(int FOLIO, System.DateTime FECHA_ENTRADA, System.DateTime FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, OPERADORESRow parentOPERADORESRowByFK_PESAJES_OPERADORES, TRANSPORTESRow parentTRANSPORTESRowByFK_PESAJES_TRANSPORTES, string ESTADO, bool BAJA, string PLACAS) {
+            public PESAJESRow AddPESAJESRow(int FOLIO, System.DateTime FECHA_ENTRADA, System.DateTime FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, OPERADORESRow parentOPERADORESRowByFK_PESAJES_OPERADORES, string ESTADO, bool BAJA, string PLACAS, int ID_EXTERNO) {
                 PESAJESRow rowPESAJESRow = ((PESAJESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1221,15 +1214,12 @@ namespace PESAJES {
                         PESO_SALIDA,
                         PESO_NETO,
                         null,
-                        null,
                         ESTADO,
                         BAJA,
-                        PLACAS};
+                        PLACAS,
+                        ID_EXTERNO};
                 if ((parentOPERADORESRowByFK_PESAJES_OPERADORES != null)) {
                     columnValuesArray[7] = parentOPERADORESRowByFK_PESAJES_OPERADORES[0];
-                }
-                if ((parentTRANSPORTESRowByFK_PESAJES_TRANSPORTES != null)) {
-                    columnValuesArray[8] = parentTRANSPORTESRowByFK_PESAJES_TRANSPORTES[0];
                 }
                 rowPESAJESRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPESAJESRow);
@@ -1268,10 +1258,10 @@ namespace PESAJES {
                 this.columnPESO_SALIDA = base.Columns["PESO_SALIDA"];
                 this.columnPESO_NETO = base.Columns["PESO_NETO"];
                 this.columnID_OPERADOR = base.Columns["ID_OPERADOR"];
-                this.columnID_TRANSPORTE = base.Columns["ID_TRANSPORTE"];
                 this.columnESTADO = base.Columns["ESTADO"];
                 this.columnBAJA = base.Columns["BAJA"];
                 this.columnPLACAS = base.Columns["PLACAS"];
+                this.columnID_EXTERNO = base.Columns["ID_EXTERNO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1293,14 +1283,14 @@ namespace PESAJES {
                 base.Columns.Add(this.columnPESO_NETO);
                 this.columnID_OPERADOR = new global::System.Data.DataColumn("ID_OPERADOR", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID_OPERADOR);
-                this.columnID_TRANSPORTE = new global::System.Data.DataColumn("ID_TRANSPORTE", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID_TRANSPORTE);
                 this.columnESTADO = new global::System.Data.DataColumn("ESTADO", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnESTADO);
                 this.columnBAJA = new global::System.Data.DataColumn("BAJA", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBAJA);
                 this.columnPLACAS = new global::System.Data.DataColumn("PLACAS", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPLACAS);
+                this.columnID_EXTERNO = new global::System.Data.DataColumn("ID_EXTERNO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID_EXTERNO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -2059,22 +2049,6 @@ namespace PESAJES {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ID_TRANSPORTE {
-                get {
-                    try {
-                        return ((int)(this[this.tablePESAJES.ID_TRANSPORTEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ID_TRANSPORTE\' de la tabla \'PESAJES\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePESAJES.ID_TRANSPORTEColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ESTADO {
                 get {
                     return ((string)(this[this.tablePESAJES.ESTADOColumn]));
@@ -2108,23 +2082,28 @@ namespace PESAJES {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID_EXTERNO {
+                get {
+                    try {
+                        return ((int)(this[this.tablePESAJES.ID_EXTERNOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'ID_EXTERNO\' de la tabla \'PESAJES\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePESAJES.ID_EXTERNOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public OPERADORESRow OPERADORESRow {
                 get {
                     return ((OPERADORESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PESAJES_OPERADORES"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_PESAJES_OPERADORES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TRANSPORTESRow TRANSPORTESRow {
-                get {
-                    return ((TRANSPORTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_PESAJES_TRANSPORTES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PESAJES_TRANSPORTES"]);
                 }
             }
             
@@ -2154,14 +2133,14 @@ namespace PESAJES {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsID_TRANSPORTENull() {
-                return this.IsNull(this.tablePESAJES.ID_TRANSPORTEColumn);
+            public bool IsID_EXTERNONull() {
+                return this.IsNull(this.tablePESAJES.ID_EXTERNOColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetID_TRANSPORTENull() {
-                this[this.tablePESAJES.ID_TRANSPORTEColumn] = global::System.Convert.DBNull;
+            public void SetID_EXTERNONull() {
+                this[this.tablePESAJES.ID_EXTERNOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2253,17 +2232,6 @@ namespace PESAJES {
                 }
                 else {
                     return ((OPERADORESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_OPERADORES_TRANSPORTES"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PESAJESRow[] GetPESAJESRows() {
-                if ((this.Table.ChildRelations["FK_PESAJES_TRANSPORTES"] == null)) {
-                    return new PESAJESRow[0];
-                }
-                else {
-                    return ((PESAJESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PESAJES_TRANSPORTES"])));
                 }
             }
         }
@@ -3239,10 +3207,10 @@ SELECT ID, NOMBRE_OPERADOR, ID_TRANSPORTE, BAJA FROM OPERADORES WHERE (ID = @ID)
             tableMapping.ColumnMappings.Add("PESO_SALIDA", "PESO_SALIDA");
             tableMapping.ColumnMappings.Add("PESO_NETO", "PESO_NETO");
             tableMapping.ColumnMappings.Add("ID_OPERADOR", "ID_OPERADOR");
-            tableMapping.ColumnMappings.Add("ID_TRANSPORTE", "ID_TRANSPORTE");
             tableMapping.ColumnMappings.Add("ESTADO", "ESTADO");
             tableMapping.ColumnMappings.Add("BAJA", "BAJA");
             tableMapping.ColumnMappings.Add("PLACAS", "PLACAS");
+            tableMapping.ColumnMappings.Add("ID_EXTERNO", "ID_EXTERNO");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -3251,8 +3219,8 @@ SELECT ID, NOMBRE_OPERADOR, ID_TRANSPORTE, BAJA FROM OPERADORES WHERE (ID = @ID)
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [PESAJES] ([FOLIO], [FECHA_ENTRADA], [FECHA_SALIDA], [PESO_ENTRADA], [PESO_SALIDA], [PESO_NETO], [ID_OPERADOR], [ID_TRANSPORTE], [ESTADO], [BAJA], [PLACAS]) VALUES (@FOLIO, @FECHA_ENTRADA, @FECHA_SALIDA, @PESO_ENTRADA, @PESO_SALIDA, @PESO_NETO, @ID_OPERADOR, @ID_TRANSPORTE, @ESTADO, @BAJA, @PLACAS);
-SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS FROM PESAJES WHERE (ID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [PESAJES] ([FOLIO], [FECHA_ENTRADA], [FECHA_SALIDA], [PESO_ENTRADA], [PESO_SALIDA], [PESO_NETO], [ID_OPERADOR], [PLACAS], [ESTADO], [BAJA], [ID_EXTERNO]) VALUES (@FOLIO, @FECHA_ENTRADA, @FECHA_SALIDA, @PESO_ENTRADA, @PESO_SALIDA, @PESO_NETO, @ID_OPERADOR, @PLACAS, @ESTADO, @BAJA, @ID_EXTERNO);
+SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, PLACAS, ESTADO, BAJA, ID_EXTERNO FROM PESAJES WHERE (ID = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FOLIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FOLIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FECHA_ENTRADA", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FECHA_ENTRADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3261,14 +3229,14 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PESO_SALIDA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "PESO_SALIDA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PESO_NETO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "PESO_NETO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_OPERADOR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_OPERADOR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_TRANSPORTE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_TRANSPORTE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PLACAS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PLACAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTADO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BAJA", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PLACAS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PLACAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_EXTERNO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_EXTERNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [PESAJES] SET [FOLIO] = @FOLIO, [FECHA_ENTRADA] = @FECHA_ENTRADA, [FECHA_SALIDA] = @FECHA_SALIDA, [PESO_ENTRADA] = @PESO_ENTRADA, [PESO_SALIDA] = @PESO_SALIDA, [PESO_NETO] = @PESO_NETO, [ID_OPERADOR] = @ID_OPERADOR, [ID_TRANSPORTE] = @ID_TRANSPORTE, [ESTADO] = @ESTADO, [BAJA] = @BAJA, [PLACAS] = @PLACAS WHERE (([ID] = @Original_ID));
-SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS FROM PESAJES WHERE (ID = @ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [PESAJES] SET [FOLIO] = @FOLIO, [FECHA_ENTRADA] = @FECHA_ENTRADA, [FECHA_SALIDA] = @FECHA_SALIDA, [PESO_ENTRADA] = @PESO_ENTRADA, [PESO_SALIDA] = @PESO_SALIDA, [PESO_NETO] = @PESO_NETO, [ID_OPERADOR] = @ID_OPERADOR, [PLACAS] = @PLACAS, [ESTADO] = @ESTADO, [BAJA] = @BAJA, [ID_EXTERNO] = @ID_EXTERNO WHERE (([ID] = @Original_ID));
+SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, PLACAS, ESTADO, BAJA, ID_EXTERNO FROM PESAJES WHERE (ID = @ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FOLIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FOLIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FECHA_ENTRADA", global::System.Data.SqlDbType.DateTime2, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FECHA_ENTRADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3277,10 +3245,10 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PESO_SALIDA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "PESO_SALIDA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PESO_NETO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "PESO_NETO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_OPERADOR", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_OPERADOR", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_TRANSPORTE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_TRANSPORTE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PLACAS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PLACAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTADO", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ESTADO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BAJA", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BAJA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PLACAS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PLACAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_EXTERNO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_EXTERNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -3295,18 +3263,22 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, " +
-                "PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS\r\nFROM            PES" +
-                "AJES WHERE BAJA = 0 and ESTADO = \'ABIERTO\'";
+            this._commandCollection[0].CommandText = "SELECT       *\r\nFROM            PESAJES WHERE BAJA = 0 and ESTADO = \'ABIERTO\'";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT COUNT(*) FROM PESAJES where FOLIO = @FOLIO";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FOLIO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FOLIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT COUNT(*) FROM PESAJES where ID_EXTERNO = @ID_EXTERNO and FOLIO = @FOLIO";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_EXTERNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_EXTERNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FOLIO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FOLIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3388,7 +3360,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, global::System.Nullable<int> ID_TRANSPORTE, string ESTADO, bool BAJA, string PLACAS) {
+        public virtual int Insert(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, string PLACAS, string ESTADO, bool BAJA, global::System.Nullable<int> ID_EXTERNO) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(FOLIO));
             this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(FECHA_ENTRADA));
             if ((FECHA_SALIDA.HasValue == true)) {
@@ -3406,11 +3378,11 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((ID_TRANSPORTE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(ID_TRANSPORTE.Value));
+            if ((PLACAS == null)) {
+                throw new global::System.ArgumentNullException("PLACAS");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(PLACAS));
             }
             if ((ESTADO == null)) {
                 throw new global::System.ArgumentNullException("ESTADO");
@@ -3419,11 +3391,11 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
                 this.Adapter.InsertCommand.Parameters[8].Value = ((string)(ESTADO));
             }
             this.Adapter.InsertCommand.Parameters[9].Value = ((bool)(BAJA));
-            if ((PLACAS == null)) {
-                throw new global::System.ArgumentNullException("PLACAS");
+            if ((ID_EXTERNO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(ID_EXTERNO.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(PLACAS));
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3445,7 +3417,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, global::System.Nullable<int> ID_TRANSPORTE, string ESTADO, bool BAJA, string PLACAS, int Original_ID, int ID) {
+        public virtual int Update(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, string PLACAS, string ESTADO, bool BAJA, global::System.Nullable<int> ID_EXTERNO, int Original_ID, int ID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(FOLIO));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(FECHA_ENTRADA));
             if ((FECHA_SALIDA.HasValue == true)) {
@@ -3463,11 +3435,11 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((ID_TRANSPORTE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(ID_TRANSPORTE.Value));
+            if ((PLACAS == null)) {
+                throw new global::System.ArgumentNullException("PLACAS");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(PLACAS));
             }
             if ((ESTADO == null)) {
                 throw new global::System.ArgumentNullException("ESTADO");
@@ -3476,11 +3448,11 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(ESTADO));
             }
             this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(BAJA));
-            if ((PLACAS == null)) {
-                throw new global::System.ArgumentNullException("PLACAS");
+            if ((ID_EXTERNO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(ID_EXTERNO.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(PLACAS));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_ID));
             this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(ID));
@@ -3504,8 +3476,8 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, global::System.Nullable<int> ID_TRANSPORTE, string ESTADO, bool BAJA, string PLACAS, int Original_ID) {
-            return this.Update(FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, ID_TRANSPORTE, ESTADO, BAJA, PLACAS, Original_ID, Original_ID);
+        public virtual int Update(int FOLIO, System.DateTime FECHA_ENTRADA, global::System.Nullable<global::System.DateTime> FECHA_SALIDA, decimal PESO_ENTRADA, decimal PESO_SALIDA, decimal PESO_NETO, global::System.Nullable<int> ID_OPERADOR, string PLACAS, string ESTADO, bool BAJA, global::System.Nullable<int> ID_EXTERNO, int Original_ID) {
+            return this.Update(FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_NETO, ID_OPERADOR, PLACAS, ESTADO, BAJA, ID_EXTERNO, Original_ID, Original_ID);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3534,6 +3506,41 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             }
             else {
                 return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual object ExisteOdoo(global::System.Nullable<int> ID_EXTERNO, int FOLIO) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((ID_EXTERNO.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(ID_EXTERNO.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[1].Value = ((int)(FOLIO));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
             }
         }
     }

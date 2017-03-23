@@ -175,10 +175,6 @@ namespace PESAJES
                         throw new Exception("Selecciona un Operador Valido");
                     }
 
-                    if (dr.IsID_TRANSPORTENull())
-                    {
-                        throw new Exception("Selecciona las placas del transporte");
-                    }
 
                     dr.PLACAS = iD_TRANSPORTEComboBox.Text;
 
