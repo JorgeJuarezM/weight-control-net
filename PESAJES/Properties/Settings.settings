@@ -10,5 +10,14 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESITEG-DEV1;Initial Catalog=bascula;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="OdooApiUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://192.168.2.25:8069/xmlrpc/common</Value>
+    </Setting>
+    <Setting Name="OdooDataBase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SUPERMIO</Value>
+    </Setting>
+    <Setting Name="OdooApiObjectUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://192.168.2.25:8069/xmlrpc/object</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

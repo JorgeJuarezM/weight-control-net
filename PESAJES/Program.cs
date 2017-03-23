@@ -19,7 +19,13 @@ namespace PESAJES
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FRM_PRINCIPAL());
+
+
+            DialogResult result = (new Login()).ShowDialog();
+            if(result == DialogResult.Yes)
+            {
+                Application.Run(new FRM_PRINCIPAL());
+            }
         }
     }
 }

@@ -8,3 +8,6 @@ c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug
 c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\PESAJES.exe.config
 c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_OPERADORES.resources
 c:\users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_TRANSPORTES.resources
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.Login.resources
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\CookComputing.XmlRpcV2.dll
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\CookComputing.XmlRpcV2.pdb

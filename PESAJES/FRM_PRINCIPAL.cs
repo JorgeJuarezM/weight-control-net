@@ -208,6 +208,15 @@ namespace PESAJES
                     iD_OPERADORComboBox.Enabled = false;
                     iD_TRANSPORTEComboBox.Enabled = false;
                     fOLIOTextBox.Enabled = true;
+
+
+                    if(dr.ESTADO == "CERRADO")
+                    {
+                        //Imprime Ticket
+                        Ticket t = new Ticket();
+                        t.print();
+                    }
+                    
                 }
 
 
