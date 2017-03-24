@@ -422,6 +422,7 @@
             this.pLACASTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pLACASTextBox.Location = new System.Drawing.Point(132, 300);
             this.pLACASTextBox.Name = "pLACASTextBox";
+            this.pLACASTextBox.ReadOnly = true;
             this.pLACASTextBox.Size = new System.Drawing.Size(140, 26);
             this.pLACASTextBox.TabIndex = 29;
             // 
@@ -429,6 +430,7 @@
             // 
             this.txtTipo.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.pESAJESBindingSource, "TIPO_PESAJE", true));
             this.txtTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtTipo.Enabled = false;
             this.txtTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipo.FormattingEnabled = true;
             this.txtTipo.Location = new System.Drawing.Point(295, 300);

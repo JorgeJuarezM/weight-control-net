@@ -68,6 +68,9 @@ namespace PESAJES
             fOLIOTextBox.Enabled = false;
             pESO_SALIDATextBox.ReadOnly = false;
             iD_OPERADORComboBox.Enabled = true;
+            pLACASTextBox.ReadOnly = false;
+            txtTipo.Enabled = true;
+            btnRegistrar.Enabled = true;
 
 
             this.pESAJESBindingSource.AddNew();
@@ -229,6 +232,8 @@ namespace PESAJES
                     iD_OPERADORComboBox.Enabled = false;
                     //iD_TRANSPORTEComboBox.Enabled = false;
                     fOLIOTextBox.Enabled = true;
+                    txtTipo.Enabled = false;
+                    pLACASTextBox.ReadOnly = true;
 
 
                     if(dr.ESTADO == "CERRADO")

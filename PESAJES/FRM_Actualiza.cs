@@ -131,33 +131,83 @@ namespace PESAJES
                     //Bajan cambios, en escritorio no podran haber cambios mas que el segundo pesaje y la fecha de salida y peso neto
 
 
+                    //Siempre se bajan los cambios de operador, placas y tipo de pesaje
+                    drPesaje.ID_OPERADOR = new_pesaje.GetIntValue("vehicle_driver");
+                    drPesaje.PLACAS = new_pesaje.GetStringValue("vehicle_plate");
+
+
                     //si en odoo es CERRADO y en ESCRITORIO es ABIERTO
                     //Bajar cambios
 
-                    if(drPesaje["ESTADO"].ToString() == "ABIERTO" && new_pesaje.GetStringValue("status") == "CERRADO")
+                    if (drPesaje["ESTADO"].ToString() == "ABIERTO" && new_pesaje.GetStringValue("status") == "CERRADO")
                     {
-                        //bajamos los pesos de salida y neto
-                        //bajamos el operador y placas
-                        //cerramos el registro
-
+                        //bajamos los pesos
+                        drPesaje.ESTADO = "CERRADO";
+                        drPesaje.TIPO_PESAJE = new_pesaje.GetStringValue("type");
+                        this.baja_pesos(drPesaje, new_pesaje);
                     }
 
-                    
-                    //Si en odoo es ABIERTO y en escritorio es CERRADO subir los cambios
 
+                    //Si en odoo es ABIERTO y en escritorio es CERRADO subir los cambios
+                    if (drPesaje["ESTADO"].ToString() == "CERRADO" && new_pesaje.GetStringValue("status") == "ABIERTO")
+                    {
+                        //Subimos los pesos
+                        new_pesaje.SetValue("type", drPesaje.TIPO_PESAJE);
+                        new_pesaje.SetValue("status", "CERRADO");
+                        this.subir_pesos(drPesaje, new_pesaje);
+                    }
 
                     //Si en odoo y escritorio es ABIERTO bajar cambios 
+                    if (drPesaje["ESTADO"].ToString() == "ABIERTO" && new_pesaje.GetStringValue("status") == "ABIERTO")
+                    {
+                        //bajamos todos los pesos
+                        drPesaje.TIPO_PESAJE = new_pesaje.GetStringValue("type");
+                        this.baja_pesos(drPesaje, new_pesaje);
+                    }
 
-                    
                     //Si en odoo y escritorio es CERRADO, comprobar valores de peso
 
+                    new_pesaje.Save();
+                    ta.Update(drPesaje);
                 }
-                  
-                
             }
 
 
 
+        }
+
+        private void subir_pesos(basculaDataSet.PESAJESRow drPesaje, OdooRecord new_pesaje)
+        {
+            if (drPesaje.TIPO_PESAJE == "pll")
+            {
+                //llegada, peso 1 = lleno, peso 2 = vacio
+                new_pesaje.SetValue("gross_weight", drPesaje.PESO_ENTRADA.ToString());
+                new_pesaje.SetValue("box_weight", drPesaje.PESO_SALIDA.ToString());
+            }
+            else if (drPesaje.TIPO_PESAJE == "psa")
+            {
+                //llegada, peso 1 = vacio, peso 2 = lleno
+                new_pesaje.SetValue("gross_weight", drPesaje.PESO_SALIDA);
+                new_pesaje.SetValue("box_weight", drPesaje.PESO_ENTRADA);
+            }
+        }
+
+        private void baja_pesos(basculaDataSet.PESAJESRow drPesaje, OdooRecord new_pesaje)
+        {
+            if (drPesaje.TIPO_PESAJE == "pll")
+            {
+                //llegada, peso 1 = lleno, peso 2 = vacio
+                drPesaje.PESO_ENTRADA = new_pesaje.GetDecimalValue("gross_weight");
+                drPesaje.PESO_SALIDA = new_pesaje.GetDecimalValue("box_weight");
+                drPesaje.PESO_NETO = Math.Abs(drPesaje.PESO_ENTRADA - drPesaje.PESO_SALIDA);
+            }
+            else if (drPesaje.TIPO_PESAJE == "psa")
+            {
+                //llegada, peso 1 = vacio, peso 2 = lleno
+                drPesaje.PESO_ENTRADA = new_pesaje.GetDecimalValue("box_weight");
+                drPesaje.PESO_SALIDA = new_pesaje.GetDecimalValue("gross_weight");
+                drPesaje.PESO_NETO = Math.Abs(drPesaje.PESO_ENTRADA - drPesaje.PESO_SALIDA);
+            }
         }
 
         private void SyncDriver(OdooRecord record)
