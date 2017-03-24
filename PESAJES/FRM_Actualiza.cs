@@ -291,7 +291,6 @@ namespace PESAJES
 
                     taFolios.UpdateFolio(folio_nuevo, "PESAJE");
 
-                    //Viene con ID Negativo
                     var pid = ta.Insert(
                         folio_nuevo, //Folio
                         fecha_entrada,

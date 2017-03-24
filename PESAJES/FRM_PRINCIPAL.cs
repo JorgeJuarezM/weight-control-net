@@ -90,7 +90,7 @@ namespace PESAJES
                 dr.PESO_SALIDA = 0;
                 dr.PESO_NETO = 0;
                 dr.BAJA = false;
-                dr.PLACAS = "-";
+                //dr.PLACAS = "-";
                 this.pESAJESBindingSource.ResetCurrentItem();
             }
 
@@ -147,19 +147,20 @@ namespace PESAJES
 
         private void iD_OPERADORComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                var id_operador_obj = iD_OPERADORComboBox.SelectedValue;
+                int id_operador = Convert.ToInt32(id_operador_obj);
 
-            //try
-            //{
-            //    var id_operador_obj = iD_OPERADORComboBox.SelectedValue;
-            //    int id_operador = Convert.ToInt32(id_operador_obj);
-
-            //    oPERADORESBindingSource.Position = oPERADORESBindingSource.Find("id", id_operador);
-            //    if (oPERADORESBindingSource.Current != null)
-            //    {
-            //        basculaDataSet.OPERADORESRow drOperador = (basculaDataSet.OPERADORESRow)((DataRowView)oPERADORESBindingSource.Current).Row;
-            //        iD_TRANSPORTEComboBox.SelectedValue = drOperador.ID_TRANSPORTE;
-            //    }
-            //} catch (Exception) { }
+                oPERADORESBindingSource.Position = oPERADORESBindingSource.Find("id", id_operador);
+                if (oPERADORESBindingSource.Current != null)
+                {
+                    basculaDataSet.OPERADORESRow drOperador = (basculaDataSet.OPERADORESRow)((DataRowView)oPERADORESBindingSource.Current).Row;
+                    //iD_TRANSPORTEComboBox.SelectedValue = drOperador.ID_TRANSPORTE;
+                    pLACASTextBox.Text = drOperador.PLACAS;
+                }
+            }
+            catch (Exception) { }
         }
 
         private void fOLIOTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -204,6 +205,11 @@ namespace PESAJES
 
                     if (dr.ESTADO == "NUEVO")
                     {
+
+                        basculaDataSetTableAdapters.FOLIOSTableAdapter tFolios = new basculaDataSetTableAdapters.FOLIOSTableAdapter();
+                        int folio_nuevo = (int)tFolios.GetNextFolio("PESAJE");
+                        tFolios.UpdateFolio(folio_nuevo, "PESAJE");
+
                         dr.FECHA_ENTRADA = DateTime.Now;
                         dr.BAJA = false;
 
@@ -211,7 +217,7 @@ namespace PESAJES
                         dr.PESO_ENTRADA = dr.PESO_SALIDA;
                         dr.PESO_SALIDA = 0;
                         dr.PESO_NETO = 0;
-                        dr.FOLIO = (new Random()).Next(1, 1525);
+                        dr.FOLIO = folio_nuevo;
 
                     }
                     else if (dr.ESTADO == "ABIERTO")
