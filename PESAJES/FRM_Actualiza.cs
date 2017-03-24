@@ -107,8 +107,20 @@ namespace PESAJES
                     new_pesaje.SetValue("folio", drPesaje["FOLIO"]);
                     new_pesaje.SetValue("vehicle_plate", drPesaje["PLACAS"]);
 
-                    new_pesaje.SetValue("type", "pll"); //Todo: Validar si es de entrada o salida
-                    new_pesaje.SetValue("box_weight", drPesaje["PESO_ENTRADA"].ToString()); //Todo: si es entrada es un peso y si es salida es otro
+                    new_pesaje.SetValue("type", drPesaje.TIPO_PESAJE); //Todo: Validar si es de entrada o salida
+
+                    if(drPesaje.TIPO_PESAJE == "pll")
+                    {
+                        new_pesaje.SetValue("gross_weight", drPesaje["PESO_ENTRADA"].ToString());
+                        new_pesaje.SetValue("box_weight", drPesaje["PESO_SALIDA"].ToString()); 
+                    }
+                    else if(drPesaje.TIPO_PESAJE == "psa")
+                    {
+                        new_pesaje.SetValue("gross_weight", drPesaje["PESO_SALIDA"].ToString());
+                        new_pesaje.SetValue("box_weight", drPesaje["PESO_ENTRADA"].ToString());
+                    }
+
+                   
                     new_pesaje.SetValue("vehicle_driver", drPesaje["ID_OPERADOR"]);
                     new_pesaje.SetValue("status", drPesaje["ESTADO"]);
 
