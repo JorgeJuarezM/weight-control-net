@@ -33,9 +33,6 @@
             System.Windows.Forms.Label iD_OPERADORLabel;
             System.Windows.Forms.Label iD_TRANSPORTELabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_PRINCIPAL));
-            this.cATALOGOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.oPERADORESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tRANSPORTESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.basculaDataSet = new PESAJES.basculaDataSet();
             this.pESAJESBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -66,6 +63,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
+            this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sincronizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -111,33 +110,10 @@
             iD_TRANSPORTELabel.TabIndex = 18;
             iD_TRANSPORTELabel.Text = "PLACAS:";
             // 
-            // cATALOGOSToolStripMenuItem
-            // 
-            this.cATALOGOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.oPERADORESToolStripMenuItem,
-            this.tRANSPORTESToolStripMenuItem});
-            this.cATALOGOSToolStripMenuItem.Name = "cATALOGOSToolStripMenuItem";
-            this.cATALOGOSToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-            this.cATALOGOSToolStripMenuItem.Text = "CATALOGOS";
-            // 
-            // oPERADORESToolStripMenuItem
-            // 
-            this.oPERADORESToolStripMenuItem.Name = "oPERADORESToolStripMenuItem";
-            this.oPERADORESToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.oPERADORESToolStripMenuItem.Text = "OPERADORES";
-            this.oPERADORESToolStripMenuItem.Click += new System.EventHandler(this.oPERADORESToolStripMenuItem_Click);
-            // 
-            // tRANSPORTESToolStripMenuItem
-            // 
-            this.tRANSPORTESToolStripMenuItem.Name = "tRANSPORTESToolStripMenuItem";
-            this.tRANSPORTESToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.tRANSPORTESToolStripMenuItem.Text = "TRANSPORTES";
-            this.tRANSPORTESToolStripMenuItem.Click += new System.EventHandler(this.tRANSPORTESToolStripMenuItem_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cATALOGOSToolStripMenuItem});
+            this.herramientasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(754, 24);
@@ -167,6 +143,7 @@
             this.tableAdapterManager.OPERADORESTableAdapter = this.oPERADORESTableAdapter;
             this.tableAdapterManager.PESAJESTableAdapter = this.pESAJESTableAdapter;
             this.tableAdapterManager.UpdateOrder = PESAJES.basculaDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.USUARIOSTableAdapter = null;
             // 
             // oPERADORESTableAdapter
             // 
@@ -438,6 +415,21 @@
             this.txtTipo.Size = new System.Drawing.Size(252, 28);
             this.txtTipo.TabIndex = 30;
             // 
+            // herramientasToolStripMenuItem
+            // 
+            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sincronizarToolStripMenuItem});
+            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
+            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.herramientasToolStripMenuItem.Text = "Herramientas";
+            // 
+            // sincronizarToolStripMenuItem
+            // 
+            this.sincronizarToolStripMenuItem.Name = "sincronizarToolStripMenuItem";
+            this.sincronizarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sincronizarToolStripMenuItem.Text = "Sincronizar";
+            this.sincronizarToolStripMenuItem.Click += new System.EventHandler(this.sincronizarToolStripMenuItem_Click);
+            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,6 +451,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FRM_PRINCIPAL";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRINCIPAL";
             this.Load += new System.EventHandler(this.FRM_PRINCIPAL_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -481,9 +474,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripMenuItem cATALOGOSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem oPERADORESToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tRANSPORTESToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private basculaDataSet basculaDataSet;
         private System.Windows.Forms.BindingSource pESAJESBindingSource;
@@ -514,5 +504,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
+        private System.Windows.Forms.ToolStripMenuItem herramientasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sincronizarToolStripMenuItem;
     }
 }

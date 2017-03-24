@@ -26,7 +26,11 @@ namespace PESAJES
             {
                 try
                 {
-                    (new FRM_Actualiza()).ShowDialog();
+                    if(Env.odooApi.IsLogged)
+                    {
+                        (new FRM_Actualiza()).ShowDialog();
+                    }
+                    
                 } catch (Exception) { }
                 Application.Run(new FRM_PRINCIPAL());
             }

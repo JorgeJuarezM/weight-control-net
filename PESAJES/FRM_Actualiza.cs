@@ -22,7 +22,18 @@ namespace PESAJES
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
-            bw.RunWorkerAsync();
+
+            Timer t = new Timer();
+            t.Interval = 3000;
+            t.Tick += (object sender_timer, EventArgs args) =>
+            {
+                t.Enabled = false;
+                bw.RunWorkerAsync();
+            };
+
+            t.Enabled = true;
+            t.Start();
+
         }
 
         private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -178,6 +189,10 @@ namespace PESAJES
                     }
 
                     //Si en odoo y escritorio es CERRADO, comprobar valores de peso
+                    if(drPesaje.ESTADO == "CERRADO" && new_pesaje.GetStringValue("status") == "CERRADO")
+                    {
+                        drPesaje.BAJA = true;
+                    }
 
                     new_pesaje.Save();
                     ta.Update(drPesaje);
@@ -199,8 +214,8 @@ namespace PESAJES
             else if (drPesaje.TIPO_PESAJE == "psa")
             {
                 //llegada, peso 1 = vacio, peso 2 = lleno
-                new_pesaje.SetValue("gross_weight", drPesaje.PESO_SALIDA);
-                new_pesaje.SetValue("box_weight", drPesaje.PESO_ENTRADA);
+                new_pesaje.SetValue("gross_weight", drPesaje.PESO_SALIDA.ToString());
+                new_pesaje.SetValue("box_weight", drPesaje.PESO_ENTRADA.ToString());
             }
         }
 

@@ -39,6 +39,14 @@ namespace PESAJES.odoo
             }
         }
 
+        public bool IsLogged
+        {
+            get 
+            {
+                return __is_logged;
+            }
+        }
+
         public OdooApi(string user, string password)
         {
             this.__username = user;

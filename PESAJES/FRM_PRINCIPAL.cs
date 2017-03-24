@@ -56,7 +56,12 @@ namespace PESAJES
             txtTipo.DisplayMember = "Value";
             txtTipo.ValueMember = "Key";
 
+            this.loadData();
+            
+        }
 
+        private void loadData()
+        {
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.OPERADORES' Puede moverla o quitarla según sea necesario.
             this.oPERADORESTableAdapter.Fill(this.basculaDataSet.OPERADORES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.PESAJES' Puede moverla o quitarla según sea necesario.
@@ -269,20 +274,6 @@ namespace PESAJES
 
             pESAJESBindingSource.CancelEdit();
 
-            //if (this.pESAJESBindingSource.Current != null)
-            //{
-
-            //    basculaDataSet.PESAJESRow dr = (basculaDataSet.PESAJESRow)((DataRowView)this.pESAJESBindingSource.Current).Row;
-            //    pESAJESBindingSource.CancelEdit();
-            //    fOLIOTextBox.Enabled = true;
-            //    iD_OPERADORComboBox.Enabled = false;
-            //    iD_TRANSPORTEComboBox.Enabled = false;
-
-            //    this.basculaDataSet.PESAJES.RemovePESAJESRow(dr);
-            //}
-
-
-
             btnCancelar.Enabled = false;
             pESO_SALIDATextBox.Focus();
             pESO_SALIDATextBox.SelectAll();
@@ -295,5 +286,10 @@ namespace PESAJES
             pESAJESBindingSource.CancelEdit();
         }
 
+        private void sincronizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            (new FRM_Actualiza()).ShowDialog();
+            loadData();
+        }
     }
 }

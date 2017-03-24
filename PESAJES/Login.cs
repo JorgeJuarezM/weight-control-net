@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using CookComputing.XmlRpc;
 using System.Collections;
+using System.Security.Cryptography;
 
 namespace PESAJES
 {
@@ -18,6 +19,63 @@ namespace PESAJES
             InitializeComponent();
         }
 
+        private bool loginLocal(string username, string password)
+        {
+            string clave = getHash(password);
+
+            basculaDataSetTableAdapters.USUARIOSTableAdapter ta = new basculaDataSetTableAdapters.USUARIOSTableAdapter();
+            int existeLogin = (int)ta.ExisteLogin(username, clave);
+
+            if(existeLogin > 0)
+            {
+                int userId = (int)ta.GetID(username, clave);
+                DateTime ultimo_acceso = (DateTime)ta.UltimoAcceso(userId);
+
+                DateTime ahora = DateTime.Now;
+
+                int days = (ahora - ultimo_acceso).Days;
+                return days < 2;
+            }else
+            {
+                return false;
+            }
+        }
+
+        private string getHash(string salt)
+        {
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            byte[] passBytes = Encoding.UTF8.GetBytes(salt);
+            byte[] hash = sha1.ComputeHash(passBytes);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in hash)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
+
+        private void updateUserPassword(int userId, string password, string username)
+        {
+
+            string clave = getHash(password);
+            basculaDataSetTableAdapters.USUARIOSTableAdapter ta = new basculaDataSetTableAdapters.USUARIOSTableAdapter();
+
+
+            int existe = (int)ta.ExisteUsuario(userId);
+            if(existe == 0)
+            {
+                ta.Insert(userId, username, clave, DateTime.Now);
+            }
+            else
+            {
+                ta.UpdateUser(clave, username, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), userId);
+            }
+            
+        }
+
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
@@ -27,33 +85,23 @@ namespace PESAJES
             try
             {
                 Env.odooApi = new odoo.OdooApi(username, password);
-                bool loginSuccess = Env.odooApi.Login();
+                bool loginSuccess = false;
+
+                try
+                {
+                    loginSuccess = Env.odooApi.Login();
+                    this.updateUserPassword(Env.odooApi.UserId, password, username);
+                }catch(Exception)
+                {
+                    //Intentar de modo local
+                    loginSuccess = this.loginLocal(username, password);
+                }
 
                 if (loginSuccess == false)
                 {
                     throw new Exception("Usuario / Contraseña Incorrectos");
                 }
-                else
-                {
-                    int user_id = Env.odooApi.UserId;
-
-                    //Obtiene usuario
-
-                    odoo.OdooModel userModel = Env.odooApi.GetModel("res.users");
-                    odoo.OdooRecord user = userModel.Browse(user_id);
-
-
-                    if (user == null)
-                    {
-                        throw new Exception("Error al obtener informacion del usuario, intente nuevamente");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Bienvenido " + user.GetStringValue("name"));
-                    }
-                }
-
-
+                
                 this.DialogResult = DialogResult.Yes;
 
             } catch(Exception ex)
