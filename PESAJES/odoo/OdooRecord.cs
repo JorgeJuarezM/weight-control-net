@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CookComputing.XmlRpc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -30,8 +31,28 @@ namespace PESAJES.odoo
         }
 
         public void SetValue(string field, object value)
-        {
-            if(__fields.ContainsKey(field))
+        { 
+
+            Type t = value.GetType();
+            if (t == (new Object[] { }).GetType())
+            {
+
+                Object[] values = (Object[])value;
+                if(values.Length > 0)
+                {
+                    value = values[0];
+                }
+                else
+                {
+                    value = null;
+                }
+                
+            }
+            
+
+            /***************************/
+
+            if (__fields.ContainsKey(field))
             {
                 __fields[field] = value;
             }
@@ -57,19 +78,7 @@ namespace PESAJES.odoo
         {
             if (__fields.ContainsKey(field))
             {
-                object value = __fields[field];
-
-                Type t = value.GetType();
-                if(t == (new Object[] { }).GetType())
-                {
-
-                    Object[] values = (Object[])value;
-                    return Convert.ToInt32(values[0]);
-                }
-                else
-                {
-                    return Convert.ToInt32(__fields[field]);
-                }
+                return Convert.ToInt32(__fields[field]);
             }
             else
             {
@@ -98,6 +107,27 @@ namespace PESAJES.odoo
             else
             {
                 throw new Exception("No existe el campo " + field);
+            }
+        }
+
+
+        public void Save()
+        {
+            XmlRpcStruct values = new XmlRpcStruct();
+
+            foreach (KeyValuePair<string, object> field in __fields)
+            {
+                values[field.Key] = field.Value;
+            }
+
+            if (__id > 0)
+            {
+                //ya existe
+                __api.Write(__model, new int[] { __id }, values);
+            }
+            else
+            {
+                __id = __api.Create(__model, values);
             }
         }
 

@@ -98,5 +98,11 @@ namespace PESAJES.odoo
         }
 
 
+        public OdooRecord CreateNew()
+        {
+            return new OdooRecord(__api, __modelName, -1);
+        }
+
+
     }
 }

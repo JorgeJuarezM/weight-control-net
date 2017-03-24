@@ -59,14 +59,13 @@
             this.pESO_NETOTextBox = new System.Windows.Forms.TextBox();
             this.iD_OPERADORComboBox = new System.Windows.Forms.ComboBox();
             this.oPERADORESBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iD_TRANSPORTEComboBox = new System.Windows.Forms.ComboBox();
-            this.tRANSPORTESBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tRANSPORTELabel1 = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.pLACASTextBox = new System.Windows.Forms.TextBox();
+            this.txtTipo = new System.Windows.Forms.ComboBox();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -76,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingNavigator)).BeginInit();
             this.pESAJESBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.oPERADORESBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tRANSPORTESBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -142,7 +140,7 @@
             this.cATALOGOSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(746, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(754, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,9 +172,6 @@
             // 
             this.oPERADORESTableAdapter.ClearBeforeFill = true;
             // 
-            // tRANSPORTESTableAdapter
-            // 
-            // 
             // pESAJESBindingNavigator
             // 
             this.pESAJESBindingNavigator.AddNewItem = null;
@@ -201,7 +196,7 @@
             this.pESAJESBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.pESAJESBindingNavigator.Name = "pESAJESBindingNavigator";
             this.pESAJESBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.pESAJESBindingNavigator.Size = new System.Drawing.Size(746, 25);
+            this.pESAJESBindingNavigator.Size = new System.Drawing.Size(754, 25);
             this.pESAJESBindingNavigator.TabIndex = 1;
             this.pESAJESBindingNavigator.Text = "bindingNavigator1";
             this.pESAJESBindingNavigator.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.pESAJESBindingNavigator_ItemClicked);
@@ -364,28 +359,6 @@
             this.oPERADORESBindingSource.DataMember = "OPERADORES";
             this.oPERADORESBindingSource.DataSource = this.basculaDataSet;
             // 
-            // iD_TRANSPORTEComboBox
-            // 
-            this.iD_TRANSPORTEComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.iD_TRANSPORTEComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.iD_TRANSPORTEComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.pESAJESBindingSource, "ID_TRANSPORTE", true));
-            this.iD_TRANSPORTEComboBox.DataSource = this.tRANSPORTESBindingSource;
-            this.iD_TRANSPORTEComboBox.DisplayMember = "PLACAS";
-            this.iD_TRANSPORTEComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.iD_TRANSPORTEComboBox.Enabled = false;
-            this.iD_TRANSPORTEComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iD_TRANSPORTEComboBox.FormattingEnabled = true;
-            this.iD_TRANSPORTEComboBox.Location = new System.Drawing.Point(132, 300);
-            this.iD_TRANSPORTEComboBox.Name = "iD_TRANSPORTEComboBox";
-            this.iD_TRANSPORTEComboBox.Size = new System.Drawing.Size(125, 28);
-            this.iD_TRANSPORTEComboBox.TabIndex = 2;
-            this.iD_TRANSPORTEComboBox.ValueMember = "ID";
-            // 
-            // tRANSPORTESBindingSource
-            // 
-            this.tRANSPORTESBindingSource.DataMember = "TRANSPORTES";
-            this.tRANSPORTESBindingSource.DataSource = this.basculaDataSet;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.pESO_ENTRADATextBox);
@@ -422,17 +395,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PESO NETO";
             // 
-            // tRANSPORTELabel1
-            // 
-            this.tRANSPORTELabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.tRANSPORTESBindingSource, "TRANSPORTE", true));
-            this.tRANSPORTELabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tRANSPORTELabel1.Location = new System.Drawing.Point(275, 300);
-            this.tRANSPORTELabel1.Name = "tRANSPORTELabel1";
-            this.tRANSPORTELabel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tRANSPORTELabel1.Size = new System.Drawing.Size(284, 63);
-            this.tRANSPORTELabel1.TabIndex = 26;
-            this.tRANSPORTELabel1.Text = "label1";
-            // 
             // btnRegistrar
             // 
             this.btnRegistrar.Location = new System.Drawing.Point(624, 266);
@@ -454,16 +416,35 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // pLACASTextBox
+            // 
+            this.pLACASTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "PLACAS", true));
+            this.pLACASTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pLACASTextBox.Location = new System.Drawing.Point(132, 300);
+            this.pLACASTextBox.Name = "pLACASTextBox";
+            this.pLACASTextBox.Size = new System.Drawing.Size(140, 26);
+            this.pLACASTextBox.TabIndex = 29;
+            // 
+            // txtTipo
+            // 
+            this.txtTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTipo.FormattingEnabled = true;
+            this.txtTipo.Location = new System.Drawing.Point(295, 300);
+            this.txtTipo.Name = "txtTipo";
+            this.txtTipo.Size = new System.Drawing.Size(252, 28);
+            this.txtTipo.TabIndex = 30;
+            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 429);
+            this.ClientSize = new System.Drawing.Size(754, 429);
+            this.Controls.Add(this.txtTipo);
+            this.Controls.Add(this.pLACASTextBox);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnRegistrar);
-            this.Controls.Add(this.tRANSPORTELabel1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.iD_TRANSPORTEComboBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(iD_TRANSPORTELabel);
             this.Controls.Add(this.groupBox2);
@@ -522,14 +503,13 @@
         private System.Windows.Forms.TextBox pESO_SALIDATextBox;
         private System.Windows.Forms.TextBox pESO_NETOTextBox;
         private System.Windows.Forms.ComboBox iD_OPERADORComboBox;
-        private System.Windows.Forms.ComboBox iD_TRANSPORTEComboBox;
         private System.Windows.Forms.BindingSource oPERADORESBindingSource;
-        private System.Windows.Forms.BindingSource tRANSPORTESBindingSource;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label tRANSPORTELabel1;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox pLACASTextBox;
+        private System.Windows.Forms.ComboBox txtTipo;
     }
 }

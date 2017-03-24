@@ -98,6 +98,25 @@ namespace PESAJES.odoo
                 this.UserId, this.Password, modelName, "search", filters);
         }
 
+
+        public bool Write(string model, int[] ids, XmlRpcStruct values)
+        {
+            IOdooObject odooObj = XmlRpcProxyGen.Create<IOdooObject>();
+            odooObj.Url = Properties.Settings.Default.OdooApiUrl + "/xmlrpc/object";
+
+            return odooObj.Write(Properties.Settings.Default.OdooDataBase,
+                    this.UserId, this.Password, model, "write", ids, values);
+        }
+
+        public int Create(string model, XmlRpcStruct obj)
+        {
+            IOdooObject odooObj = XmlRpcProxyGen.Create<IOdooObject>();
+            odooObj.Url = Properties.Settings.Default.OdooApiUrl + "/xmlrpc/object";
+
+            return odooObj.Create(Properties.Settings.Default.OdooDataBase,
+                    this.UserId, this.Password, model, "create", obj);
+        }
+
         
     }
 }

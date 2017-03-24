@@ -35,6 +35,28 @@ namespace PESAJES
 
         private void FRM_PRINCIPAL_Load(object sender, EventArgs e)
         {
+
+            DataTable tblTipos = new DataTable();
+            tblTipos.Columns.Add("Key");
+            tblTipos.Columns.Add("Value");
+
+            DataRow dr1 = tblTipos.NewRow();
+            dr1["Key"] = "pll";
+            dr1["Value"] = "Pesaje de Llegada";
+
+            tblTipos.Rows.Add(dr1);
+
+            DataRow dr2 = tblTipos.NewRow();
+            dr2["Key"] = "psa";
+            dr2["Value"] = "Pesaje de Salida";
+
+            tblTipos.Rows.Add(dr2);
+
+            txtTipo.DataSource = tblTipos;
+            txtTipo.DisplayMember = "Value";
+            txtTipo.ValueMember = "Key";
+
+
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.OPERADORES' Puede moverla o quitarla según sea necesario.
             this.oPERADORESTableAdapter.Fill(this.basculaDataSet.OPERADORES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.PESAJES' Puede moverla o quitarla según sea necesario.
@@ -46,7 +68,7 @@ namespace PESAJES
             fOLIOTextBox.Enabled = false;
             pESO_SALIDATextBox.ReadOnly = false;
             iD_OPERADORComboBox.Enabled = true;
-            iD_TRANSPORTEComboBox.Enabled = true;
+
 
             this.pESAJESBindingSource.AddNew();
 
@@ -104,6 +126,7 @@ namespace PESAJES
                     decimal.TryParse(pESO_ENTRADATextBox.Text, out tara);
 
                     decimal neto = entrada - tara;
+                    neto = Math.Abs(neto);
 
                     pESO_NETOTextBox.Text = neto.ToString("0.000");
                 }
@@ -174,7 +197,7 @@ namespace PESAJES
                     }
 
 
-                    dr.PLACAS = iD_TRANSPORTEComboBox.Text;
+                    //dr.PLACAS = iD_TRANSPORTEComboBox.Text;
 
                     if (dr.ESTADO == "NUEVO")
                     {
@@ -200,7 +223,7 @@ namespace PESAJES
                     this.tableAdapterManager.UpdateAll(this.basculaDataSet);
 
                     iD_OPERADORComboBox.Enabled = false;
-                    iD_TRANSPORTEComboBox.Enabled = false;
+                    //iD_TRANSPORTEComboBox.Enabled = false;
                     fOLIOTextBox.Enabled = true;
 
 
