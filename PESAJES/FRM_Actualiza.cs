@@ -241,7 +241,8 @@ namespace PESAJES
                         placas, //PLacas
                         "ABIERTO", //Estado
                         false, //Baja
-                        id_odoo //External ID
+                        id_odoo, //External ID
+                        tipo_peso
                     );
 
                 }
@@ -255,7 +256,7 @@ namespace PESAJES
             {
                 //Si existe y es coherente, actualizarlo
                 Int32 id = (Int32)ta.GetId(id_odoo);
-                ta.Update(folio, fecha_entrada, null, peso_entrada, 0, 0, id_operador, placas, "ABIERTO", false, id_odoo, id);
+                ta.Update(folio, fecha_entrada, null, peso_entrada, 0, 0, id_operador, placas, "ABIERTO", false, id_odoo, tipo_peso, id);
             }
         }
     }

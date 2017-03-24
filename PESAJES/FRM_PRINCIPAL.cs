@@ -216,7 +216,11 @@ namespace PESAJES
                         basculaDataSet.PESAJESRow drU = (basculaDataSet.PESAJESRow)((DataRowView)this.pESAJESBindingSource.Current).Row;
                         drU.PESO_NETO = drU.PESO_SALIDA - drU.PESO_ENTRADA;
                         drU.FECHA_SALIDA = DateTime.Now;
-                        drU.ESTADO = "CERRADO";
+
+                        if(MessageBox.Show("Deseas cerrar el Pesaje?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            drU.ESTADO = "CERRADO";
+                        }
                     }
 
 
