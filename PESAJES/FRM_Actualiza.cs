@@ -10,15 +10,30 @@ using PESAJES.odoo;
 
 namespace PESAJES
 {
+    
+
     public partial class FRM_Actualiza : Form
     {
+        public event EventHandler<SendMessageEventArgs> SendMessage;
+
         public FRM_Actualiza()
         {
             InitializeComponent();
         }
 
-        private void FRM_Actualiza_Load(object sender, EventArgs e)
+        private bool isBackground = false;
+        private bool isError = false;
+
+        protected virtual void OnSendMessage(string message, bool isError = false)
         {
+            SendMessageEventArgs args = new SendMessageEventArgs() { message = message, isError = isError };
+            SendMessage?.Invoke(this, args);
+        }
+
+        public void StartUpdate(bool background = false)
+        {
+            isBackground = background;
+
             BackgroundWorker bw = new BackgroundWorker();
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
@@ -33,12 +48,48 @@ namespace PESAJES
 
             t.Enabled = true;
             t.Start();
+        }
 
+        private void FRM_Actualiza_Load(object sender, EventArgs e)
+        {
+            this.StartUpdate();
+        }
+
+        private void Bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                isError = false;
+                this.RunUpdate();
+            }
+            catch(Exception ex)
+            {
+                if(isBackground == false)
+                {
+                    isError = true;
+                    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    isError = true;
+                    OnSendMessage(ex.Message, true);
+                }
+            }
         }
 
         private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.close_form();
+            if(isBackground == false)
+            {
+                this.close_form();
+            }
+            else
+            {
+                if(isError == false)
+                {
+                    OnSendMessage("!!....Actualizado....!!");
+                }
+            }
         }
 
         private void close_form()
@@ -53,7 +104,7 @@ namespace PESAJES
             }
         }
 
-        private void Bw_DoWork(object sender, DoWorkEventArgs e)
+        private void RunUpdate()
         {
             //Sincroniza Operadores
             OdooModel operadoresModel = Env.odooApi.GetModel("weight.drivers");
@@ -198,9 +249,6 @@ namespace PESAJES
                     ta.Update(drPesaje);
                 }
             }
-
-
-
         }
 
         private void subir_pesos(basculaDataSet.PESAJESRow drPesaje, OdooRecord new_pesaje)
@@ -335,5 +383,11 @@ namespace PESAJES
                 ta.Update(folio, fecha_entrada, null, peso_entrada, 0, 0, id_operador, placas, "ABIERTO", false, id_odoo, tipo_peso, id);
             }
         }
+    }
+
+    public class SendMessageEventArgs : EventArgs
+    {
+        public string message { get; set; }
+        public bool isError { get; set; } = false;
     }
 }

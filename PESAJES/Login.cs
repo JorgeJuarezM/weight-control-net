@@ -90,8 +90,13 @@ namespace PESAJES
                 try
                 {
                     loginSuccess = Env.odooApi.Login();
-                    this.updateUserPassword(Env.odooApi.UserId, password, username);
-                }catch(Exception)
+
+                    if (loginSuccess)
+                    {
+                        this.updateUserPassword(Env.odooApi.UserId, password, username);
+                    }
+                }
+                catch(Exception)
                 {
                     //Intentar de modo local
                     loginSuccess = this.loginLocal(username, password);

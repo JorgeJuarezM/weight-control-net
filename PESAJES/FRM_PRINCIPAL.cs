@@ -57,7 +57,31 @@ namespace PESAJES
             txtTipo.ValueMember = "Key";
 
             this.loadData();
-            
+
+            //Background Update
+
+            Timer t = new Timer();
+            t.Interval = 3000;
+            t.Tick += (object sender_timer, EventArgs args) =>
+            {
+                t.Interval = 300000;
+                FRM_Actualiza f = new FRM_Actualiza();
+                f.SendMessage += (object sender_msg, SendMessageEventArgs SendMessageEvent) =>
+                {
+                    if(SendMessageEvent.isError)
+                    {
+                        t.Interval = 10000;
+                    }
+
+                    lblStatus.Text = SendMessageEvent.message;
+                };
+                lblStatus.Text = "Actualizando....";
+                f.StartUpdate(true);
+            };
+
+            t.Enabled = true;
+            t.Start();
+
         }
 
         private void loadData()

@@ -33,7 +33,6 @@
             System.Windows.Forms.Label iD_OPERADORLabel;
             System.Windows.Forms.Label iD_TRANSPORTELabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_PRINCIPAL));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.basculaDataSet = new PESAJES.basculaDataSet();
             this.pESAJESBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pESAJESTableAdapter = new PESAJES.basculaDataSetTableAdapters.PESAJESTableAdapter();
@@ -63,12 +62,11 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
-            this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sincronizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.basculaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingNavigator)).BeginInit();
@@ -77,6 +75,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // fOLIOLabel
@@ -109,16 +108,6 @@
             iD_TRANSPORTELabel.Size = new System.Drawing.Size(76, 20);
             iD_TRANSPORTELabel.TabIndex = 18;
             iD_TRANSPORTELabel.Text = "PLACAS:";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.herramientasToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(754, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // basculaDataSet
             // 
@@ -166,7 +155,7 @@
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem});
-            this.pESAJESBindingNavigator.Location = new System.Drawing.Point(0, 24);
+            this.pESAJESBindingNavigator.Location = new System.Drawing.Point(0, 0);
             this.pESAJESBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.pESAJESBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.pESAJESBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -415,26 +404,28 @@
             this.txtTipo.Size = new System.Drawing.Size(252, 28);
             this.txtTipo.TabIndex = 30;
             // 
-            // herramientasToolStripMenuItem
+            // statusStrip1
             // 
-            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sincronizarToolStripMenuItem});
-            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
-            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.herramientasToolStripMenuItem.Text = "Herramientas";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 420);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(754, 22);
+            this.statusStrip1.TabIndex = 31;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // sincronizarToolStripMenuItem
+            // lblStatus
             // 
-            this.sincronizarToolStripMenuItem.Name = "sincronizarToolStripMenuItem";
-            this.sincronizarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sincronizarToolStripMenuItem.Text = "Sincronizar";
-            this.sincronizarToolStripMenuItem.Click += new System.EventHandler(this.sincronizarToolStripMenuItem_Click);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(71, 17);
+            this.lblStatus.Text = "Esperando...";
             // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 429);
+            this.ClientSize = new System.Drawing.Size(754, 442);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.pLACASTextBox);
             this.Controls.Add(this.btnCancelar);
@@ -448,14 +439,10 @@
             this.Controls.Add(fOLIOLabel);
             this.Controls.Add(this.fOLIOTextBox);
             this.Controls.Add(this.pESAJESBindingNavigator);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FRM_PRINCIPAL";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRINCIPAL";
             this.Load += new System.EventHandler(this.FRM_PRINCIPAL_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.basculaDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingNavigator)).EndInit();
@@ -468,13 +455,14 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private basculaDataSet basculaDataSet;
         private System.Windows.Forms.BindingSource pESAJESBindingSource;
         private basculaDataSetTableAdapters.PESAJESTableAdapter pESAJESTableAdapter;
@@ -504,7 +492,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
-        private System.Windows.Forms.ToolStripMenuItem herramientasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sincronizarToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }
