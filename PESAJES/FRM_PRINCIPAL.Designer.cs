@@ -62,8 +62,6 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -75,7 +73,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // fOLIOLabel
@@ -165,6 +162,7 @@
             this.pESAJESBindingNavigator.Size = new System.Drawing.Size(754, 25);
             this.pESAJESBindingNavigator.TabIndex = 1;
             this.pESAJESBindingNavigator.Text = "bindingNavigator1";
+            this.pESAJESBindingNavigator.RefreshItems += new System.EventHandler(this.pESAJESBindingNavigator_RefreshItems);
             this.pESAJESBindingNavigator.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.pESAJESBindingNavigator_ItemClicked);
             // 
             // bindingNavigatorCountItem
@@ -404,28 +402,11 @@
             this.txtTipo.Size = new System.Drawing.Size(252, 28);
             this.txtTipo.TabIndex = 30;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 420);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(754, 22);
-            this.statusStrip1.TabIndex = 31;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(71, 17);
-            this.lblStatus.Text = "Esperando...";
-            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 442);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(754, 435);
             this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.pLACASTextBox);
             this.Controls.Add(this.btnCancelar);
@@ -455,8 +436,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,7 +471,5 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }

@@ -11,3 +11,4 @@ C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.csproj.GenerateResource.Cache
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.exe
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.pdb
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.Frm_PreguntaActualiza.resources

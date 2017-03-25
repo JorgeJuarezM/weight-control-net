@@ -65,6 +65,12 @@
     <Compile Include="FRM_OPERADORES.Designer.cs">
       <DependentUpon>FRM_OPERADORES.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_PreguntaActualiza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_PreguntaActualiza.Designer.cs">
+      <DependentUpon>Frm_PreguntaActualiza.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRM_PRINCIPAL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FRM_OPERADORES.resx">
       <DependentUpon>FRM_OPERADORES.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_PreguntaActualiza.resx">
+      <DependentUpon>Frm_PreguntaActualiza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRM_PRINCIPAL.resx">
       <DependentUpon>FRM_PRINCIPAL.cs</DependentUpon>

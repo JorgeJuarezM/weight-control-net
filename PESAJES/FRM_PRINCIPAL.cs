@@ -61,22 +61,31 @@ namespace PESAJES
             //Background Update
 
             Timer t = new Timer();
-            t.Interval = 3000;
+            t.Interval = 30000;
             t.Tick += (object sender_timer, EventArgs args) =>
             {
-                t.Interval = 300000;
-                FRM_Actualiza f = new FRM_Actualiza();
-                f.SendMessage += (object sender_msg, SendMessageEventArgs SendMessageEvent) =>
-                {
-                    if(SendMessageEvent.isError)
-                    {
-                        t.Interval = 10000;
-                    }
+                Frm_PreguntaActualiza f = new Frm_PreguntaActualiza();
+                //f.SendMessage += (object sender_msg, SendMessageEventArgs SendMessageEvent) =>
+                //{
+                //    if (SendMessageEvent.isError)
+                //    {
+                //        t.Interval = 10000;
+                //    }
 
-                    lblStatus.Text = SendMessageEvent.message;
-                };
-                lblStatus.Text = "Actualizando....";
-                f.StartUpdate(true);
+                //    this.loadData();
+
+                //    lblStatus.Text = SendMessageEvent.message;
+                //};
+                //lblStatus.Text = "Actualizando....";
+                //f.StartUpdate(true);
+
+
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    this.loadData();
+                }
+                
+
             };
 
             t.Enabled = true;
@@ -86,6 +95,7 @@ namespace PESAJES
 
         private void loadData()
         {
+            this.basculaDataSet.Clear();
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.OPERADORES' Puede moverla o quitarla según sea necesario.
             this.oPERADORESTableAdapter.Fill(this.basculaDataSet.OPERADORES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.PESAJES' Puede moverla o quitarla según sea necesario.
@@ -258,6 +268,7 @@ namespace PESAJES
                         if(MessageBox.Show("Deseas cerrar el Pesaje?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             drU.ESTADO = "CERRADO";
+                            drU.FECHA_SALIDA = DateTime.Now;
                         }
                     }
 
@@ -314,6 +325,11 @@ namespace PESAJES
         {
             (new FRM_Actualiza()).ShowDialog();
             loadData();
+        }
+
+        private void pESAJESBindingNavigator_RefreshItems(object sender, EventArgs e)
+        {
+
         }
     }
 }

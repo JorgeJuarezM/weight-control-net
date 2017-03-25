@@ -57,10 +57,11 @@ namespace PESAJES
 
         private void Bw_DoWork(object sender, DoWorkEventArgs e)
         {
+            this.RunUpdate();
             try
             {
                 isError = false;
-                this.RunUpdate();
+                
             }
             catch(Exception ex)
             {
@@ -218,6 +219,7 @@ namespace PESAJES
                         //bajamos los pesos
                         drPesaje.ESTADO = "CERRADO";
                         drPesaje.TIPO_PESAJE = new_pesaje.GetStringValue("type");
+                        drPesaje.FECHA_SALIDA = new_pesaje.GetDateTimeValue("out_date");
                         this.baja_pesos(drPesaje, new_pesaje);
                     }
 
@@ -228,6 +230,7 @@ namespace PESAJES
                         //Subimos los pesos
                         new_pesaje.SetValue("type", drPesaje.TIPO_PESAJE);
                         new_pesaje.SetValue("status", "CERRADO");
+                        new_pesaje.SetValue("out_date", drPesaje.FECHA_SALIDA.ToString("yyyy-MM-dd HH:mm:ss"));
                         this.subir_pesos(drPesaje, new_pesaje);
                     }
 
