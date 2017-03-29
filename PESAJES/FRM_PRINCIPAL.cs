@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -35,6 +36,7 @@ namespace PESAJES
 
         private void FRM_PRINCIPAL_Load(object sender, EventArgs e)
         {
+            serialPort1.Open();
 
             DataTable tblTipos = new DataTable();
             tblTipos.Columns.Add("Key");
@@ -61,25 +63,10 @@ namespace PESAJES
             //Background Update
 
             Timer t = new Timer();
-            t.Interval = 30000;
+            t.Interval = 300000;
             t.Tick += (object sender_timer, EventArgs args) =>
             {
                 Frm_PreguntaActualiza f = new Frm_PreguntaActualiza();
-                //f.SendMessage += (object sender_msg, SendMessageEventArgs SendMessageEvent) =>
-                //{
-                //    if (SendMessageEvent.isError)
-                //    {
-                //        t.Interval = 10000;
-                //    }
-
-                //    this.loadData();
-
-                //    lblStatus.Text = SendMessageEvent.message;
-                //};
-                //lblStatus.Text = "Actualizando....";
-                //f.StartUpdate(true);
-
-
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     this.loadData();
@@ -134,10 +121,6 @@ namespace PESAJES
             }
 
             btnCancelar.Enabled = true;
-
-            pESO_SALIDATextBox.Select();
-            pESO_SALIDATextBox.Focus();
-            pESO_SALIDATextBox.SelectAll();
         }
 
         private void pESO_SALIDATextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -179,9 +162,7 @@ namespace PESAJES
 
         private void pESAJESBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-            pESO_SALIDATextBox.Focus();
-            pESO_SALIDATextBox.Select();
-            pESO_SALIDATextBox.SelectAll();
+
         }
 
         private void iD_OPERADORComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -225,8 +206,10 @@ namespace PESAJES
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            serialPort1.Close();
             try
             {
+                
                 if (this.pESAJESBindingSource.Current != null)
                 {
                     //this.Validate();
@@ -294,14 +277,14 @@ namespace PESAJES
 
                 this.pESAJESTableAdapter.Fill(this.basculaDataSet.PESAJES);
                 btnCancelar.Enabled = false;
-                pESO_SALIDATextBox.Focus();
-                pESO_SALIDATextBox.SelectAll();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            serialPort1.Open();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -310,8 +293,6 @@ namespace PESAJES
             pESAJESBindingSource.CancelEdit();
 
             btnCancelar.Enabled = false;
-            pESO_SALIDATextBox.Focus();
-            pESO_SALIDATextBox.SelectAll();
 
 
         }
@@ -330,6 +311,27 @@ namespace PESAJES
         private void pESAJESBindingNavigator_RefreshItems(object sender, EventArgs e)
         {
 
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            SerialPort port = (SerialPort)sender;
+            string data = port.ReadLine();
+            decimal toSend = Convert.ToDecimal(data);
+            setWeight(toSend);
+        }
+
+        private void setWeight(decimal data)
+        {
+            if(InvokeRequired)
+            {
+                this.Invoke(new Action(() => { setWeight(data); }));
+            }
+            else
+            {
+                pESO_SALIDATextBox.Text = data.ToString("0.000");
+            }
+            
         }
     }
 }

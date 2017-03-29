@@ -273,6 +273,15 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
+              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="bascula.dbo.PESAJES" DbObjectType="Table" GenerateMethods="Get" GenerateShortCommands="true" GeneratorGetMethodName="GetCerrados" GetMethodModifier="Public" GetMethodName="GetCerrados" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetCerrados" UserSourceName="GetCerrados">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT       *
+FROM            PESAJES WHERE BAJA = 0 and ESTADO = 'CERRADO'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
               <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="bascula.dbo.PESAJES" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetFolio" Modifier="Public" Name="GetFolio" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetFolio">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
@@ -347,7 +356,7 @@ SELECT ID, NOMBRE_USUARIO, CLAVE, ULTIMO_ACCESO FROM USUARIOS WHERE (ID = @ID)</
               <Mapping SourceColumn="ULTIMO_ACCESO" DataSetColumn="ULTIMO_ACCESO" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ExisteLogin" Modifier="Public" Name="ExisteLogin" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="ExisteLogin">
+              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ExisteLogin" Modifier="Public" Name="ExisteLogin" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ExisteLogin">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(*) FROM USUARIOS where NOMBRE_USUARIO = @USUARIO and CLAVE = @CLAVE</CommandText>
@@ -358,7 +367,7 @@ SELECT ID, NOMBRE_USUARIO, CLAVE, ULTIMO_ACCESO FROM USUARIOS WHERE (ID = @ID)</
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ExisteUsuario" Modifier="Public" Name="ExisteUsuario" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="ExisteUsuario">
+              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="ExisteUsuario" Modifier="Public" Name="ExisteUsuario" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="ExisteUsuario">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(*) FROM USUARIOS where ID = @ID</CommandText>
@@ -368,7 +377,7 @@ SELECT ID, NOMBRE_USUARIO, CLAVE, ULTIMO_ACCESO FROM USUARIOS WHERE (ID = @ID)</
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="bascula.dbo.USUARIOS" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetID" Modifier="Public" Name="GetID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="GetID">
+              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="bascula.dbo.USUARIOS" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="GetID" Modifier="Public" Name="GetID" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="GetID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT TOP(1) ID FROM USUARIOS where NOMBRE_USUARIO = @USUARIO and CLAVE = @CLAVE</CommandText>
@@ -390,7 +399,7 @@ where id = @id</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateUser" Modifier="Public" Name="UpdateUser" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateUser">
+              <DbSource ConnectionRef="basculaConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateUser" Modifier="Public" Name="UpdateUser" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="UpdateUser">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [USUARIOS] SET [CLAVE] = @CLAVE, [NOMBRE_USUARIO] = @USUARIO, [ULTIMO_ACCESO] = @ULTIMO_ACCESO WHERE (([ID] = @ID));</CommandText>
@@ -480,7 +489,7 @@ where id = @id</CommandText>
               <xs:element name="PLACAS" msprop:Generator_ColumnVarNameInTable="columnPLACAS" msprop:Generator_ColumnPropNameInRow="PLACAS" msprop:Generator_ColumnPropNameInTable="PLACASColumn" msprop:Generator_UserColumnName="PLACAS">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="40" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

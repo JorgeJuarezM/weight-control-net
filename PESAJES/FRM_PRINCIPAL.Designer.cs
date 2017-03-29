@@ -62,6 +62,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -277,8 +278,10 @@
             this.pESO_SALIDATextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pESO_SALIDATextBox.Location = new System.Drawing.Point(3, 22);
             this.pESO_SALIDATextBox.Name = "pESO_SALIDATextBox";
+            this.pESO_SALIDATextBox.ReadOnly = true;
             this.pESO_SALIDATextBox.Size = new System.Drawing.Size(716, 73);
             this.pESO_SALIDATextBox.TabIndex = 0;
+            this.pESO_SALIDATextBox.TabStop = false;
             this.pESO_SALIDATextBox.Text = "100000.000";
             this.pESO_SALIDATextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.pESO_SALIDATextBox.TextChanged += new System.EventHandler(this.pESO_SALIDATextBox_TextChanged);
@@ -402,6 +405,11 @@
             this.txtTipo.Size = new System.Drawing.Size(252, 28);
             this.txtTipo.TabIndex = 30;
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM3";
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,5 +479,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }

@@ -1329,7 +1329,7 @@ namespace PESAJES {
                 this.columnESTADO.MaxLength = 20;
                 this.columnBAJA.AllowDBNull = false;
                 this.columnPLACAS.AllowDBNull = false;
-                this.columnPLACAS.MaxLength = 10;
+                this.columnPLACAS.MaxLength = 40;
                 this.columnTIPO_PESAJE.MaxLength = 5;
                 this.Locale = new global::System.Globalization.CultureInfo("es-ES");
             }
@@ -3435,7 +3435,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[6];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT       *\r\nFROM            PESAJES WHERE BAJA = 0 and ESTADO = \'ABIERTO\'";
@@ -3459,14 +3459,18 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "SELECT TOP(1) FOLIO FROM PESAJES where ID = @ID";
+            this._commandCollection[4].CommandText = "SELECT       *\r\nFROM            PESAJES WHERE BAJA = 0 and ESTADO = \'CERRADO\'";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = "SELECT TOP(1) ID FROM PESAJES where ID_EXTERNO = @ID_EXTERNO";
+            this._commandCollection[5].CommandText = "SELECT TOP(1) FOLIO FROM PESAJES where ID = @ID";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_EXTERNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_EXTERNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[6].Connection = this.Connection;
+            this._commandCollection[6].CommandText = "SELECT TOP(1) ID FROM PESAJES where ID_EXTERNO = @ID_EXTERNO";
+            this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_EXTERNO", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID_EXTERNO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3499,6 +3503,17 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual basculaDataSet.PESAJESDataTable GetAll() {
             this.Adapter.SelectCommand = this.CommandCollection[3];
+            basculaDataSet.PESAJESDataTable dataTable = new basculaDataSet.PESAJESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual basculaDataSet.PESAJESDataTable GetCerrados() {
+            this.Adapter.SelectCommand = this.CommandCollection[4];
             basculaDataSet.PESAJESDataTable dataTable = new basculaDataSet.PESAJESDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -3759,7 +3774,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual global::System.Nullable<int> GetFolio(int ID) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[5];
             command.Parameters[0].Value = ((int)(ID));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3788,7 +3803,7 @@ SELECT ID, FOLIO, FECHA_ENTRADA, FECHA_SALIDA, PESO_ENTRADA, PESO_SALIDA, PESO_N
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual global::System.Nullable<int> GetId(global::System.Nullable<int> ID_EXTERNO) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[5];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
             if ((ID_EXTERNO.HasValue == true)) {
                 command.Parameters[0].Value = ((int)(ID_EXTERNO.Value));
             }
