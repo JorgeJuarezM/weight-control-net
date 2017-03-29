@@ -59,6 +59,18 @@
     <Compile Include="FRM_Actualiza.Designer.cs">
       <DependentUpon>FRM_Actualiza.cs</DependentUpon>
     </Compile>
+    <Compile Include="FRM_Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_Config.Designer.cs">
+      <DependentUpon>FRM_Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_Folios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_Folios.Designer.cs">
+      <DependentUpon>FRM_Folios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRM_OPERADORES.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +105,12 @@
     <Compile Include="Ticket.cs" />
     <EmbeddedResource Include="FRM_Actualiza.resx">
       <DependentUpon>FRM_Actualiza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_Config.resx">
+      <DependentUpon>FRM_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_Folios.resx">
+      <DependentUpon>FRM_Folios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRM_OPERADORES.resx">
       <DependentUpon>FRM_OPERADORES.cs</DependentUpon>

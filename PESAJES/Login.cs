@@ -96,8 +96,10 @@ namespace PESAJES
                         this.updateUserPassword(Env.odooApi.UserId, password, username);
                     }
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Se Iniciará una sesion local!");
                     //Intentar de modo local
                     loginSuccess = this.loginLocal(username, password);
                 }
@@ -119,6 +121,11 @@ namespace PESAJES
         {
             txtUsername.Focus();
             txtUsername.SelectAll();
+        }
+
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            (new FRM_Config()).ShowDialog();
         }
     }
 

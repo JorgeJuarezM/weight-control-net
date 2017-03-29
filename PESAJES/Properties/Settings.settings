@@ -16,5 +16,8 @@
     <Setting Name="OdooApiUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://192.168.2.25:8069</Value>
     </Setting>
+    <Setting Name="PuertoCOM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

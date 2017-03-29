@@ -56,5 +56,17 @@ namespace PESAJES.Properties {
                 this["OdooApiUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM3")]
+        public string PuertoCOM {
+            get {
+                return ((string)(this["PuertoCOM"]));
+            }
+            set {
+                this["PuertoCOM"] = value;
+            }
+        }
     }
 }

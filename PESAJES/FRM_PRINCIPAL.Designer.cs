@@ -33,6 +33,7 @@
             System.Windows.Forms.Label iD_OPERADORLabel;
             System.Windows.Forms.Label iD_TRANSPORTELabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_PRINCIPAL));
+            System.Windows.Forms.Label label1;
             this.basculaDataSet = new PESAJES.basculaDataSet();
             this.pESAJESBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pESAJESTableAdapter = new PESAJES.basculaDataSetTableAdapters.PESAJESTableAdapter();
@@ -63,9 +64,11 @@
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.basculaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pESAJESBindingNavigator)).BeginInit();
@@ -81,7 +84,7 @@
             fOLIOLabel.AutoSize = true;
             fOLIOLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             fOLIOLabel.ForeColor = System.Drawing.Color.RoyalBlue;
-            fOLIOLabel.Location = new System.Drawing.Point(20, 374);
+            fOLIOLabel.Location = new System.Drawing.Point(20, 377);
             fOLIOLabel.Name = "fOLIOLabel";
             fOLIOLabel.Size = new System.Drawing.Size(86, 25);
             fOLIOLabel.TabIndex = 4;
@@ -91,7 +94,7 @@
             // 
             iD_OPERADORLabel.AutoSize = true;
             iD_OPERADORLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            iD_OPERADORLabel.Location = new System.Drawing.Point(21, 269);
+            iD_OPERADORLabel.Location = new System.Drawing.Point(21, 245);
             iD_OPERADORLabel.Name = "iD_OPERADORLabel";
             iD_OPERADORLabel.Size = new System.Drawing.Size(105, 20);
             iD_OPERADORLabel.TabIndex = 16;
@@ -101,7 +104,7 @@
             // 
             iD_TRANSPORTELabel.AutoSize = true;
             iD_TRANSPORTELabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            iD_TRANSPORTELabel.Location = new System.Drawing.Point(21, 303);
+            iD_TRANSPORTELabel.Location = new System.Drawing.Point(21, 279);
             iD_TRANSPORTELabel.Name = "iD_TRANSPORTELabel";
             iD_TRANSPORTELabel.Size = new System.Drawing.Size(76, 20);
             iD_TRANSPORTELabel.TabIndex = 18;
@@ -247,7 +250,7 @@
             // 
             this.fOLIOTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "FOLIO", true));
             this.fOLIOTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fOLIOTextBox.Location = new System.Drawing.Point(132, 371);
+            this.fOLIOTextBox.Location = new System.Drawing.Point(132, 374);
             this.fOLIOTextBox.Name = "fOLIOTextBox";
             this.fOLIOTextBox.Size = new System.Drawing.Size(140, 31);
             this.fOLIOTextBox.TabIndex = 5;
@@ -259,6 +262,7 @@
             this.pESO_ENTRADATextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.pESO_ENTRADATextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "PESO_ENTRADA", true));
             this.pESO_ENTRADATextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pESO_ENTRADATextBox.Enabled = false;
             this.pESO_ENTRADATextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pESO_ENTRADATextBox.Location = new System.Drawing.Point(3, 22);
             this.pESO_ENTRADATextBox.Name = "pESO_ENTRADATextBox";
@@ -282,7 +286,7 @@
             this.pESO_SALIDATextBox.Size = new System.Drawing.Size(716, 73);
             this.pESO_SALIDATextBox.TabIndex = 0;
             this.pESO_SALIDATextBox.TabStop = false;
-            this.pESO_SALIDATextBox.Text = "100000.000";
+            this.pESO_SALIDATextBox.Text = "9999999999";
             this.pESO_SALIDATextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.pESO_SALIDATextBox.TextChanged += new System.EventHandler(this.pESO_SALIDATextBox_TextChanged);
             this.pESO_SALIDATextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pESO_SALIDATextBox_KeyPress);
@@ -293,6 +297,7 @@
             this.pESO_NETOTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.pESO_NETOTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "PESO_NETO", true));
             this.pESO_NETOTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pESO_NETOTextBox.Enabled = false;
             this.pESO_NETOTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pESO_NETOTextBox.Location = new System.Drawing.Point(3, 22);
             this.pESO_NETOTextBox.Name = "pESO_NETOTextBox";
@@ -310,11 +315,10 @@
             this.iD_OPERADORComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.pESAJESBindingSource, "ID_OPERADOR", true));
             this.iD_OPERADORComboBox.DataSource = this.oPERADORESBindingSource;
             this.iD_OPERADORComboBox.DisplayMember = "NOMBRE_OPERADOR";
-            this.iD_OPERADORComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.iD_OPERADORComboBox.Enabled = false;
             this.iD_OPERADORComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.iD_OPERADORComboBox.FormattingEnabled = true;
-            this.iD_OPERADORComboBox.Location = new System.Drawing.Point(132, 266);
+            this.iD_OPERADORComboBox.Location = new System.Drawing.Point(132, 242);
             this.iD_OPERADORComboBox.Name = "iD_OPERADORComboBox";
             this.iD_OPERADORComboBox.Size = new System.Drawing.Size(415, 28);
             this.iD_OPERADORComboBox.TabIndex = 1;
@@ -331,7 +335,7 @@
             this.groupBox2.Controls.Add(this.pESO_ENTRADATextBox);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.groupBox2.Location = new System.Drawing.Point(12, 179);
+            this.groupBox2.Location = new System.Drawing.Point(12, 155);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(349, 78);
             this.groupBox2.TabIndex = 3;
@@ -343,7 +347,7 @@
             this.groupBox3.Controls.Add(this.pESO_SALIDATextBox);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.groupBox3.Location = new System.Drawing.Point(12, 62);
+            this.groupBox3.Location = new System.Drawing.Point(12, 38);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(722, 111);
             this.groupBox3.TabIndex = 0;
@@ -355,7 +359,7 @@
             this.groupBox1.Controls.Add(this.pESO_NETOTextBox);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.groupBox1.Location = new System.Drawing.Point(385, 179);
+            this.groupBox1.Location = new System.Drawing.Point(385, 155);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(349, 78);
             this.groupBox1.TabIndex = 4;
@@ -364,7 +368,7 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(624, 266);
+            this.btnRegistrar.Location = new System.Drawing.Point(624, 242);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(107, 57);
             this.btnRegistrar.TabIndex = 27;
@@ -375,7 +379,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Enabled = false;
-            this.btnCancelar.Location = new System.Drawing.Point(624, 350);
+            this.btnCancelar.Location = new System.Drawing.Point(624, 326);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(107, 35);
             this.btnCancelar.TabIndex = 28;
@@ -387,7 +391,7 @@
             // 
             this.pLACASTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "PLACAS", true));
             this.pLACASTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pLACASTextBox.Location = new System.Drawing.Point(132, 300);
+            this.pLACASTextBox.Location = new System.Drawing.Point(132, 276);
             this.pLACASTextBox.Name = "pLACASTextBox";
             this.pLACASTextBox.ReadOnly = true;
             this.pLACASTextBox.Size = new System.Drawing.Size(140, 26);
@@ -400,7 +404,7 @@
             this.txtTipo.Enabled = false;
             this.txtTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipo.FormattingEnabled = true;
-            this.txtTipo.Location = new System.Drawing.Point(295, 300);
+            this.txtTipo.Location = new System.Drawing.Point(295, 276);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(252, 28);
             this.txtTipo.TabIndex = 30;
@@ -410,11 +414,33 @@
             this.serialPort1.PortName = "COM3";
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(132, 314);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(415, 28);
+            this.comboBox1.TabIndex = 31;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.Location = new System.Drawing.Point(21, 317);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(92, 20);
+            label1.TabIndex = 32;
+            label1.Text = "EMPRESA:";
+            // 
             // FRM_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 435);
+            this.ClientSize = new System.Drawing.Size(754, 421);
+            this.Controls.Add(label1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.pLACASTextBox);
             this.Controls.Add(this.btnCancelar);
@@ -480,5 +506,6 @@
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

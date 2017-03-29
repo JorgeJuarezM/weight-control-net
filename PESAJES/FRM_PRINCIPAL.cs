@@ -36,7 +36,18 @@ namespace PESAJES
 
         private void FRM_PRINCIPAL_Load(object sender, EventArgs e)
         {
-            serialPort1.Open();
+            fOLIOTextBox.Select();
+            fOLIOTextBox.Focus();
+            fOLIOTextBox.SelectAll();
+
+            try
+            {
+                serialPort1.PortName = Properties.Settings.Default.PuertoCOM;
+                serialPort1.Open();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al abrir puerto de comunicación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             DataTable tblTipos = new DataTable();
             tblTipos.Columns.Add("Key");
@@ -206,12 +217,31 @@ namespace PESAJES
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            serialPort1.Close();
+            //serialPort1.Close();
             try
             {
-                
+               
                 if (this.pESAJESBindingSource.Current != null)
                 {
+
+                    if(iD_OPERADORComboBox.SelectedValue == null)
+                    {
+                        //registrar operador
+                        if(iD_OPERADORComboBox.Text.Length > 0)
+                        {
+                            int operador = (int)this.oPERADORESTableAdapter.InsertQuery(iD_OPERADORComboBox.Text, pLACASTextBox.Text, null, null);
+                            
+                            this.oPERADORESTableAdapter.Fill(basculaDataSet.OPERADORES);
+                            iD_OPERADORComboBox.SelectedValue = operador;
+
+                        } else
+                        {
+                            throw new Exception("Indique el nombre del operador");
+                        }
+                        
+                    }
+
+
                     //this.Validate();
                     this.pESAJESBindingSource.EndEdit();
 
@@ -269,7 +299,12 @@ namespace PESAJES
                     {
                         //Imprime Ticket
                         Ticket t = new Ticket();
-                        t.print();
+                        
+                    }
+                    else if(dr.ESTADO == "ABIERTO")
+                    {
+                        Ticket t = new Ticket();
+                        t.printEntrada();
                     }
                     
                 }
@@ -284,7 +319,7 @@ namespace PESAJES
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            serialPort1.Open();
+            //serialPort1.Open();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -317,8 +352,14 @@ namespace PESAJES
         {
             SerialPort port = (SerialPort)sender;
             string data = port.ReadLine();
-            decimal toSend = Convert.ToDecimal(data);
-            setWeight(toSend);
+            try
+            {
+                decimal toSend = Convert.ToDecimal(data);
+                setWeight(toSend);
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void setWeight(decimal data)

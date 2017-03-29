@@ -116,6 +116,32 @@ namespace PESAJES
                 SyncDriver(operador);
             }
 
+
+            /********************Actualiza Operadores*******************/
+            basculaDataSetTableAdapters.OPERADORESTableAdapter tOp = new basculaDataSetTableAdapters.OPERADORESTableAdapter();
+            basculaDataSet.OPERADORESDataTable tblOperadores = tOp.GetData();
+
+
+            foreach(basculaDataSet.OPERADORESRow drOperador in tblOperadores)
+            {
+                int existeOdoo = (int)tOp.ExisteOdoo(drOperador.ID);
+                if(existeOdoo <= 0)
+                {
+                    OdooRecord operador = operadoresModel.CreateNew();
+                    operador.SetValue("name", drOperador.NOMBRE_OPERADOR);
+                    operador.SetValue("vehicle_plate", drOperador.PLACAS);
+                    operador.SetValue("phone_number", drOperador.TELEFONO);
+                    operador.Save();
+
+                    drOperador.ID_EXTERNO = operador.Id;
+                    tOp.Update(drOperador);
+                }
+            }
+
+            /***********************************************************/
+
+
+
             OdooModel pesajesModel = Env.odooApi.GetModel("weight.order");
             basculaDataSetTableAdapters.PESAJESTableAdapter ta = new basculaDataSetTableAdapters.PESAJESTableAdapter();
 
