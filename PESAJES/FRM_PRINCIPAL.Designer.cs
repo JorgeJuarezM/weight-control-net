@@ -32,8 +32,8 @@
             System.Windows.Forms.Label fOLIOLabel;
             System.Windows.Forms.Label iD_OPERADORLabel;
             System.Windows.Forms.Label iD_TRANSPORTELabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_PRINCIPAL));
             System.Windows.Forms.Label label1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRM_PRINCIPAL));
             this.basculaDataSet = new PESAJES.basculaDataSet();
             this.pESAJESBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pESAJESTableAdapter = new PESAJES.basculaDataSetTableAdapters.PESAJESTableAdapter();
@@ -64,7 +64,9 @@
             this.pLACASTextBox = new System.Windows.Forms.TextBox();
             this.txtTipo = new System.Windows.Forms.ComboBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.txtEmpresa = new System.Windows.Forms.ComboBox();
+            this.fOLIOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fOLIOSTableAdapter = new PESAJES.basculaDataSetTableAdapters.FOLIOSTableAdapter();
             fOLIOLabel = new System.Windows.Forms.Label();
             iD_OPERADORLabel = new System.Windows.Forms.Label();
             iD_TRANSPORTELabel = new System.Windows.Forms.Label();
@@ -77,6 +79,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fOLIOSBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // fOLIOLabel
@@ -109,6 +112,16 @@
             iD_TRANSPORTELabel.Size = new System.Drawing.Size(76, 20);
             iD_TRANSPORTELabel.TabIndex = 18;
             iD_TRANSPORTELabel.Text = "PLACAS:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.Location = new System.Drawing.Point(21, 317);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(92, 20);
+            label1.TabIndex = 32;
+            label1.Text = "EMPRESA:";
             // 
             // basculaDataSet
             // 
@@ -248,12 +261,12 @@
             // 
             // fOLIOTextBox
             // 
-            this.fOLIOTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pESAJESBindingSource, "FOLIO", true));
             this.fOLIOTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fOLIOTextBox.Location = new System.Drawing.Point(132, 374);
             this.fOLIOTextBox.Name = "fOLIOTextBox";
             this.fOLIOTextBox.Size = new System.Drawing.Size(140, 31);
             this.fOLIOTextBox.TabIndex = 5;
+            this.fOLIOTextBox.TextChanged += new System.EventHandler(this.fOLIOTextBox_TextChanged);
             this.fOLIOTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fOLIOTextBox_KeyDown);
             // 
             // pESO_ENTRADATextBox
@@ -414,25 +427,29 @@
             this.serialPort1.PortName = "COM3";
             this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
-            // comboBox1
+            // txtEmpresa
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(132, 314);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(415, 28);
-            this.comboBox1.TabIndex = 31;
+            this.txtEmpresa.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.pESAJESBindingSource, "SECUENCIA", true));
+            this.txtEmpresa.DataSource = this.fOLIOSBindingSource;
+            this.txtEmpresa.DisplayMember = "EMPRESA";
+            this.txtEmpresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtEmpresa.Enabled = false;
+            this.txtEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpresa.FormattingEnabled = true;
+            this.txtEmpresa.Location = new System.Drawing.Point(132, 314);
+            this.txtEmpresa.Name = "txtEmpresa";
+            this.txtEmpresa.Size = new System.Drawing.Size(415, 28);
+            this.txtEmpresa.TabIndex = 31;
+            this.txtEmpresa.ValueMember = "SECUENCIA";
             // 
-            // label1
+            // fOLIOSBindingSource
             // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label1.Location = new System.Drawing.Point(21, 317);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(92, 20);
-            label1.TabIndex = 32;
-            label1.Text = "EMPRESA:";
+            this.fOLIOSBindingSource.DataMember = "FOLIOS";
+            this.fOLIOSBindingSource.DataSource = this.basculaDataSet;
+            // 
+            // fOLIOSTableAdapter
+            // 
+            this.fOLIOSTableAdapter.ClearBeforeFill = true;
             // 
             // FRM_PRINCIPAL
             // 
@@ -440,7 +457,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(754, 421);
             this.Controls.Add(label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.txtEmpresa);
             this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.pLACASTextBox);
             this.Controls.Add(this.btnCancelar);
@@ -470,6 +487,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fOLIOSBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,6 +524,8 @@
         private System.Windows.Forms.TextBox pLACASTextBox;
         private System.Windows.Forms.ComboBox txtTipo;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox txtEmpresa;
+        private System.Windows.Forms.BindingSource fOLIOSBindingSource;
+        private basculaDataSetTableAdapters.FOLIOSTableAdapter fOLIOSTableAdapter;
     }
 }

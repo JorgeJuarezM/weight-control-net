@@ -39,7 +39,7 @@ namespace PESAJES
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
 
             Timer t = new Timer();
-            t.Interval = 3000;
+            t.Interval = 1000;
             t.Tick += (object sender_timer, EventArgs args) =>
             {
                 t.Enabled = false;
@@ -124,7 +124,14 @@ namespace PESAJES
 
             foreach(basculaDataSet.OPERADORESRow drOperador in tblOperadores)
             {
-                int existeOdoo = (int)tOp.ExisteOdoo(drOperador.ID);
+                int id_externo = -1;
+
+                if (!drOperador.IsID_EXTERNONull())
+                {
+                    id_externo = Convert.ToInt32(drOperador.ID_EXTERNO);
+                }
+
+                int existeOdoo = (int)tOp.ExisteOdoo(id_externo);
                 if(existeOdoo <= 0)
                 {
                     OdooRecord operador = operadoresModel.CreateNew();
@@ -138,10 +145,57 @@ namespace PESAJES
                 }
             }
 
+
+            /**
+             * Actualiza Series (Empresas)
+             */
+            basculaDataSetTableAdapters.FOLIOSTableAdapter taFolio = new basculaDataSetTableAdapters.FOLIOSTableAdapter();
+
+            OdooModel empresasModel = Env.odooApi.GetModel("weight.companies");
+            var empresas = empresasModel.Search();
+
+            foreach(OdooRecord empresa in empresas)
+            {
+                string serie = empresa.GetStringValue("serie");
+                basculaDataSet.FOLIOSDataTable dtFolios = taFolio.GetBySecuencia(serie);
+                if(dtFolios.Rows.Count == 0)
+                {
+                    taFolio.Insert(
+                            serie,
+                            empresa.GetIntValue("current_folio"),
+                            empresa.GetIntValue("interval"),
+                            empresa.GetStringValue("name"),
+                            empresa.GetStringValue("company_address"),
+                            empresa.GetStringValue("phone_number"),
+                            false);
+                }
+
+            }
+
+            basculaDataSet.FOLIOSDataTable tblFolios = taFolio.GetData();
+            foreach (basculaDataSet.FOLIOSRow folioRow in tblFolios.Rows)
+            {
+                var existeEnOdoo = empresasModel.Search(new object[]
+                {
+                    new object[] {"serie", "=", folioRow.SECUENCIA}
+                });
+
+                if(existeEnOdoo.Count == 0)
+                {
+                    OdooRecord newFolio = empresasModel.CreateNew();
+                    newFolio.SetValue("name", folioRow.EMPRESA);
+                    newFolio.SetValue("company_address", folioRow.DOMICILIO);
+                    newFolio.SetValue("phone_number", folioRow.TELEFONO);
+                    newFolio.SetValue("current_folio", folioRow.FOLIO_ACTUAL);
+                    newFolio.SetValue("interval", folioRow.INTERVALO);
+                    newFolio.SetValue("serie", folioRow.SECUENCIA);
+                    newFolio.Save();
+                }
+            }
+
+
+
             /***********************************************************/
-
-
-
             OdooModel pesajesModel = Env.odooApi.GetModel("weight.order");
             basculaDataSetTableAdapters.PESAJESTableAdapter ta = new basculaDataSetTableAdapters.PESAJESTableAdapter();
 
@@ -167,8 +221,12 @@ namespace PESAJES
                     if(pesajeOdoo != null) //Si existe en odoo
                     {
                         //siempre actualiza (Placas, Operador, tipo de pesaje y peso de entrada)
+
+                        basculaDataSetTableAdapters.OPERADORESTableAdapter opTA = new basculaDataSetTableAdapters.OPERADORESTableAdapter();
+                        int operador_local = (int)opTA.GetId(pesajeOdoo.GetIntValue("vehicle_driver"));
+
                         drPesaje.PLACAS = pesajeOdoo.GetStringValue("vehicle_plate");
-                        drPesaje.ID_OPERADOR = pesajeOdoo.GetIntValue("vehicle_driver");
+                        drPesaje.ID_OPERADOR = operador_local;
                         drPesaje.TIPO_PESAJE = pesajeOdoo.GetStringValue("type");
 
                         if (drPesaje.TIPO_PESAJE == "pll")
@@ -290,9 +348,19 @@ namespace PESAJES
                         baja = true;
                     }
 
+                    /*Obtener Folio */
+                    string serie = pesajeOdoo.GetStringValue("serie");
+                    int? folio_siguiente = taFolio.GetNextFolio(serie);
+
+                    if(folio_siguiente == null)
+                    {
+                        return;
+                    }
+
+                    taFolio.UpdateFolio((int)folio_siguiente, serie);
 
                     ta.Insert(
-                            pesajeOdoo.GetIntValue("folio"),
+                            (int)folio_siguiente,
                             pesajeOdoo.GetDateTimeValue("date"),
                             fechaSalida,
                             pesajeEntrada,
@@ -303,8 +371,12 @@ namespace PESAJES
                             pesajeOdoo.GetStringValue("status"),
                             baja,
                             idOdoo,
-                            pesajeOdoo.GetStringValue("type")
+                            pesajeOdoo.GetStringValue("type"),
+                            serie
                             );
+
+                    pesajeOdoo.SetValue("folio", folio_siguiente);
+                    pesajeOdoo.Save();
                 }
             }
 
@@ -328,8 +400,10 @@ namespace PESAJES
                     OdooRecord pesajeOdoo = pesajesModel.CreateNew();
 
                     pesajeOdoo.SetValue("origin", "DESK");
+                    pesajeOdoo.SetValue("serie", drPesaje.SECUENCIA);
                     pesajeOdoo.SetValue("folio", drPesaje.FOLIO);
                     pesajeOdoo.SetValue("vehicle_plate", drPesaje.PLACAS);
+                    
 
                     pesajeOdoo.SetValue("type", drPesaje.TIPO_PESAJE); //Todo: Validar si es de entrada o salida
 
@@ -344,16 +418,30 @@ namespace PESAJES
                         pesajeOdoo.SetValue("box_weight", drPesaje.PESO_ENTRADA.ToString());
                     }
 
+                    //OBTENER OPERADOR
+                    basculaDataSetTableAdapters.OPERADORESTableAdapter taOp = new basculaDataSetTableAdapters.OPERADORESTableAdapter();
+                    int op_id_externo = (int)taOp.GetIDExterno(drPesaje.ID_OPERADOR);
 
-                    pesajeOdoo.SetValue("vehicle_driver", drPesaje.ID_OPERADOR);
+
+                    pesajeOdoo.SetValue("vehicle_driver", op_id_externo);
                     pesajeOdoo.SetValue("status", drPesaje.ESTADO);
 
                     var fechaEntrada = drPesaje.FECHA_ENTRADA.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
 
                     pesajeOdoo.SetValue("date", fechaEntrada);
 
-                   
 
+                    //Set Empresa
+                    var empresa = empresasModel.Search(new object[]
+                    {
+                        new object[] {"serie", "=", drPesaje.SECUENCIA}
+                    });
+
+                    if(empresa.Count > 0)
+                    {
+                        int company_id = empresa[0].GetIntValue("id");
+                        pesajeOdoo.SetValue("company_id", company_id);
+                    }
                     
                     if(drPesaje.ESTADO == "CERRADO")
                     {

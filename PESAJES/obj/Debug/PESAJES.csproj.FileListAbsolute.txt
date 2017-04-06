@@ -13,5 +13,6 @@ C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.pdb
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.Frm_PreguntaActualiza.resources
 C:\Users\jjuarez\Documents\Visual Studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_Config.resources
-C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.csprojResolveAssemblyReference.cache
 C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.FRM_Folios.resources
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\bin\Debug\Zen.Barcode.Core.dll
+C:\Users\jjuarez\documents\visual studio 2015\Projects\PESAJES\PESAJES\obj\Debug\PESAJES.csprojResolveAssemblyReference.cache

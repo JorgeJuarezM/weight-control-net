@@ -36,6 +36,8 @@ namespace PESAJES
 
         private void FRM_PRINCIPAL_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.FOLIOS' Puede moverla o quitarla según sea necesario.
+            this.fOLIOSTableAdapter.Fill(this.basculaDataSet.FOLIOS);
             fOLIOTextBox.Select();
             fOLIOTextBox.Focus();
             fOLIOTextBox.SelectAll();
@@ -77,13 +79,15 @@ namespace PESAJES
             t.Interval = 300000;
             t.Tick += (object sender_timer, EventArgs args) =>
             {
-                Frm_PreguntaActualiza f = new Frm_PreguntaActualiza();
-                if (f.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    this.loadData();
+                    Frm_PreguntaActualiza f = new Frm_PreguntaActualiza();
+                    if (f.ShowDialog() == DialogResult.OK)
+                    {
+                        this.loadData();
+                    }
                 }
-                
-
+                catch (Exception) { }
             };
 
             t.Enabled = true;
@@ -94,10 +98,14 @@ namespace PESAJES
         private void loadData()
         {
             this.basculaDataSet.Clear();
+
+            this.fOLIOSTableAdapter.Fill(this.basculaDataSet.FOLIOS);
+
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.OPERADORES' Puede moverla o quitarla según sea necesario.
             this.oPERADORESTableAdapter.Fill(this.basculaDataSet.OPERADORES);
             // TODO: esta línea de código carga datos en la tabla 'basculaDataSet.PESAJES' Puede moverla o quitarla según sea necesario.
             this.pESAJESTableAdapter.Fill(this.basculaDataSet.PESAJES);
+           
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -108,6 +116,7 @@ namespace PESAJES
             pLACASTextBox.ReadOnly = false;
             txtTipo.Enabled = true;
             btnRegistrar.Enabled = true;
+            txtEmpresa.Enabled = true;
 
 
             this.pESAJESBindingSource.AddNew();
@@ -173,7 +182,15 @@ namespace PESAJES
 
         private void pESAJESBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-
+            if(pESAJESBindingSource.Current != null)
+            {
+                try
+                {
+                    basculaDataSet.PESAJESRow dr = (basculaDataSet.PESAJESRow)((DataRowView)pESAJESBindingSource.Current).Row;
+                    fOLIOTextBox.Text = String.Format("{0}/{1}", dr.SECUENCIA, dr.FOLIO);
+                }
+                catch (Exception) { }
+            }
         }
 
         private void iD_OPERADORComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -199,19 +216,57 @@ namespace PESAJES
             if (e.KeyCode == Keys.Enter)
             {
                 string value = fOLIOTextBox.Text;
+                string[] valueSplit = value.Split('/');
+
+                string folio = "";
+                string serie = "";
+
+                if(valueSplit.Length >= 2)
+                {
+                    serie = valueSplit[0];
+                    folio = valueSplit[1];
+                }
+                else
+                {
+                    valueSplit = value.Split('-');
+                    if(valueSplit.Length >= 2)
+                    {
+                        serie = valueSplit[0];
+                        folio = valueSplit[1];
+                    }
+                }
+
+
                 pESAJESBindingSource.CancelEdit();
 
                 e.Handled = true;
 
-                int position = pESAJESBindingSource.Find("FOLIO", value);
+
+                var pesajes = from p in this.basculaDataSet.PESAJES
+                              where p.SECUENCIA == serie && p.FOLIO.ToString() == folio
+                              select p.ID;
+
+
+                int position = -1;
+
+                foreach(var p in pesajes)
+                {
+                    position = pESAJESBindingSource.Find("ID", p);
+                }
+
+
                 if(position >= 0)
                 {
                     pESAJESBindingSource.Position = position;
+                    
                 }
                 else
                 {
                     MessageBox.Show("Registro no encontrado");
                 }
+
+                fOLIOTextBox.Focus();
+                fOLIOTextBox.SelectAll();
             }
         }
 
@@ -257,11 +312,12 @@ namespace PESAJES
 
                     if (dr.ESTADO == "NUEVO")
                     {
-
+                        string secuencia = txtEmpresa.SelectedValue.ToString();
                         basculaDataSetTableAdapters.FOLIOSTableAdapter tFolios = new basculaDataSetTableAdapters.FOLIOSTableAdapter();
-                        int folio_nuevo = (int)tFolios.GetNextFolio("PESAJE");
-                        tFolios.UpdateFolio(folio_nuevo, "PESAJE");
+                        int folio_nuevo = (int)tFolios.GetNextFolio(secuencia);
+                        tFolios.UpdateFolio(folio_nuevo, secuencia);
 
+                        //dr.SECUENCIA = secuencia;
                         dr.FECHA_ENTRADA = DateTime.Now;
                         dr.BAJA = false;
 
@@ -293,18 +349,20 @@ namespace PESAJES
                     fOLIOTextBox.Enabled = true;
                     txtTipo.Enabled = false;
                     pLACASTextBox.ReadOnly = true;
+                    txtEmpresa.Enabled = false;
 
 
-                    if(dr.ESTADO == "CERRADO")
+                    if (dr.ESTADO == "CERRADO")
                     {
                         //Imprime Ticket
                         Ticket t = new Ticket();
+                        t.PrintSalida(dr.ID);
                         
                     }
                     else if(dr.ESTADO == "ABIERTO")
                     {
                         Ticket t = new Ticket();
-                        t.printEntrada();
+                        t.printEntrada(dr.ID);
                     }
                     
                 }
@@ -313,11 +371,21 @@ namespace PESAJES
                 this.pESAJESTableAdapter.Fill(this.basculaDataSet.PESAJES);
                 btnCancelar.Enabled = false;
 
+                fOLIOTextBox.Focus();
+                fOLIOTextBox.SelectAll();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+            try
+            {
+                (new FRM_Actualiza()).ShowDialog();
+            }
+            catch (Exception) { };
 
             //serialPort1.Open();
         }
@@ -373,6 +441,11 @@ namespace PESAJES
                 pESO_SALIDATextBox.Text = data.ToString("0.000");
             }
             
+        }
+
+        private void fOLIOTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

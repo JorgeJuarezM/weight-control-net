@@ -11,7 +11,7 @@
       <Value Profile="(Default)">Data Source=DESITEG-DEV1;Initial Catalog=bascula;Integrated Security=True</Value>
     </Setting>
     <Setting Name="OdooDataBase" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BASCULA</Value>
+      <Value Profile="(Default)">bascula</Value>
     </Setting>
     <Setting Name="OdooApiUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://192.168.2.25:8069</Value>
